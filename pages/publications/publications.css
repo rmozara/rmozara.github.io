@@ -1,0 +1,57 @@
+/* =========================================
+   Publications List Styling
+   -----------------------------------------
+   Purpose:
+   - Clean, readable layout for publication entries
+   - Consistent spacing, divider rhythm, and typography hierarchy
+   ======================================= */
+
+.publications-list {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--space-md);
+  background: var(--color-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
+}
+
+.pub {
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: var(--divider);
+}
+
+.pub-title {
+  font-size: var(--font-md);
+  font-weight: 600;
+  margin: 0 0 var(--space-sm);
+}
+
+.pub-title a {
+  color: var(--color-accent-dark);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.pub-title a:hover {
+  color: var(--color-blue-soft);
+  text-decoration: underline;
+}
+
+.pub-authors {
+  color: var(--color-muted);
+  margin: 0 0 var(--space-sm);
+  line-height: var(--line-normal);
+}
+
+.pub-journal {
+  color: var(--color-accent-dark);
+  margin: 0;
+  font-style: italic;
+}
+
+.publications-list .pub:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}

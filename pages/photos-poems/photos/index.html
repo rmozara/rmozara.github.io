@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" class="preload">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Photo Gallery – Alma | Roberto Mozara</title>
+
+  <!-- ========== STYLES ========== -->
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+  <link rel="stylesheet" href="photos.css">
+
+  <!-- ========== PREFETCH ========== -->
+  <link rel="prefetch" href="../../partials/header-simple.html">
+  <link rel="prefetch" href="../../partials/footer.html">
+</head>
+
+<body class="photos-page">
+
+  <!-- =========================================
+       MAIN CONTENT – Dynamic header & footer
+  ========================================= -->
+  <div class="wrap">
+    <div class="wrap-inner">
+
+      <section class="gallery-section">
+        <article class="txt-card" style="width: 760px; margin: 0 auto;">
+          <h2>Photos by Alma</h2>
+          <p>
+            A selection of photographs by Alma, capturing moments, impressions, and details from her surroundings,
+            conveying a sense of everyday grace.
+          </p>
+        </article>
+
+        <div class="photo-grid">
+          <!-- Photos inserted automatically via photos.js -->
+        </div>
+
+        <p class="copyright">
+          © Alma. All photographs by Alma remain the property of the artist.
+        </p>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- =========================================
+       LIGHTBOX VIEWER
+  ========================================= -->
+  <div id="photo-lightbox" class="lightbox">
+    <div class="lightbox-overlay"></div>
+    <div class="lightbox-card">
+      <button class="lightbox-close" aria-label="Close">×</button>
+      <button class="lightbox-prev" aria-label="Previous photo">‹</button>
+      <img class="lightbox-img" src="" alt="">
+      <button class="lightbox-next" aria-label="Next photo">›</button>
+    </div>
+  </div>
+
+  <!-- =========================================
+       SCRIPTS – Passive logic
+  ========================================= -->
+  <script defer src="../../../assets/js/loadPartials.js"></script>
+  <script defer src="https://unpkg.com/lucide@0.422.0/dist/umd/lucide.js"></script>
+  <script defer src="../../../assets/js/main.js"></script>
+  <script defer src="photos.js"></script>
+
+</body>
+</html>

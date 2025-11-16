@@ -1,0 +1,81 @@
+/* =========================================
+   Footer – Base Styling
+   =========================================
+   Purpose:
+   - Provides a fixed footer that gently “reveals” as the user scrolls.
+   - Maintains visual continuity with the wrap background and global color palette.
+========================================= */
+
+/* -----------------------------------------
+   Footer Base
+   -----------------------------------------
+   Purpose:
+   - Centers footer text both horizontally and vertically.
+   - Defines fixed positioning and color palette.
+----------------------------------------- */
+
+.footer {
+  position: fixed;                   /* Docked to viewport bottom */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;                     /* Flexbox for centering */
+  align-items: center;               /* Vertical alignment */
+  justify-content: center;           /* Horizontal alignment */
+  height: var(--footer-h);           /* Controlled by root variable */
+  background: var(--color-bg);       /* Same as wrap background → seamless transition */
+  color: var(--color-accent-dark);   /* Subtle blue tone for refined appearance */
+  z-index: var(--z-footer);          /* Below wrap, above page background */
+}
+
+/* -----------------------------------------
+   Footer Text
+   -----------------------------------------
+   Purpose:
+   - Defines typography style for small footer note.
+----------------------------------------- */
+
+.footer .small {
+  font-size: var(--font-base);             /* Stable px-based text size */
+  letter-spacing: calc(var(--letter-space) * 0.5); /* Light tracking */
+  color: var(--color-accent-dark);         /* Slightly darker tone for contrast */
+  margin: var(--space-xs) 0 0 0;           /* Prevent browser default margin */
+}
+
+/* For the impressum link */
+.footer-link {
+  color: var(--color-accent-dark);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.footer-link:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+
+/* -----------------------------------------
+   Footer Reveal Logic
+   -----------------------------------------
+   Purpose:
+   - Ensures the footer appears naturally at scroll end.
+   - Adds invisible space equal to footer height to prevent content overlap.
+----------------------------------------- */
+
+html, body {
+  height: auto;                      /* Allow full scroll height */
+  min-height: 100%;                  /* Prevent premature cutoff */
+  overflow-y: auto;                  /* Natural scroll behavior */
+}
+
+body {
+  position: relative !important;     /* Ensures stacking context for wrap and footer */
+}
+
+/* Spacer element: keeps footer from overlapping last content */
+body::after {
+  content: "";
+  display: block;
+  height: var(--footer-h);           /* Matches fixed footer height */
+  background: transparent;           /* Invisible buffer */
+}

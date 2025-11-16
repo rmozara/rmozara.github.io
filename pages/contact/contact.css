@@ -1,0 +1,32 @@
+/* =========================================
+   CONTACT PAGE – Card Styling Only
+   =========================================
+   Purpose:
+   - Reuse .card styling from _cards.css
+   - Sharp corners, same width and spacing as Publications
+========================================= */
+
+.contact-card {
+  border-radius: 0; /* sharp corners */
+  max-width: 720px; /* same as .publications-list */
+  margin: 0 auto;   /* center horizontally */
+  text-align: center;
+  padding: var(--space-xl);
+}
+
+.contact-card p {
+  max-width: 55ch;          /* readable line length */
+  margin: 0 auto var(--space-md); /* center paragraphs */
+  line-height: var(--line-relaxed);
+  color: var(--color-accent-dark);
+}
+
+.contact-card a {
+  color: var(--color-accent);
+  font-weight: var(--link-font-weight);
+  text-decoration: none;
+}
+
+.contact-card a:hover {
+  text-decoration: underline;
+}

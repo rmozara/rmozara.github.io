@@ -1,0 +1,239 @@
+/* =========================================================
+   PHOTOS PAGE
+   ========================================================= */
+
+/* -----------------------------------------
+   Layout
+----------------------------------------- */
+.photos-page .wrap-inner {
+  max-width: var(--layout-w);
+  margin: 0 auto;
+  padding-top: var(--space-xl);
+}
+
+/* -----------------------------------------
+   Gallery section wrapper
+----------------------------------------- */
+.photos-page .gallery-section {
+  max-width: var(--layout-w);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+/* -----------------------------------------
+   Intro text card
+----------------------------------------- */
+.photos-page .txt-card {
+  background: var(--color-card);
+  box-shadow: var(--shadow-soft);
+  border-radius: var(--radius-card);
+  padding: var(--space-lg);
+  text-align: center;
+  margin: 0 auto var(--space-lg);
+  width: var(--photos-intro-w, 760px);
+}
+
+.photos-page .txt-card h2 {
+  margin-top: 0;
+  letter-spacing: calc(var(--letter-space) * 0.5);
+  color: var(--color-fg);
+}
+
+.photos-page .txt-card p {
+  color: var(--color-accent-dark);
+  line-height: var(--line-relaxed);
+  margin-bottom: 0;
+}
+
+/* -----------------------------------------
+   Masonry grid
+----------------------------------------- */
+.photos-page .photo-grid {
+  column-count: var(--photos-cols-lg, 3);
+  column-gap: calc(var(--space-md) / 2);
+  max-width: var(--layout-w);
+  margin: var(--space-lg) auto;
+}
+
+.photos-page .photo-grid figure {
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 calc(var(--space-md) / 2);
+  break-inside: avoid;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  background: var(--color-card);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.photos-page .photo-grid figure:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-medium);
+}
+
+.photos-page .photo-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+}
+
+/* -----------------------------------------
+   Copyright line
+----------------------------------------- */
+.photos-page .copyright {
+  margin-bottom: 0;
+  font-size: var(--font-base);
+  color: var(--color-accent-dark);
+  text-align: left;
+  letter-spacing: calc(var(--letter-space) * 0.5);
+  max-width: var(--layout-w);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* -----------------------------------------
+   Responsive adjustments
+----------------------------------------- */
+@media (max-width: 1100px) {
+  .photos-page .photo-grid {
+    column-count: var(--photos-cols-md, 2);
+  }
+}
+
+@media (max-width: 700px) {
+  .photos-page .photo-grid {
+    column-count: var(--photos-cols-sm, 1);
+  }
+
+  .photos-page .txt-card {
+    padding: var(--space-md);
+    width: auto;
+  }
+}
+
+/* -----------------------------------------
+   Page background
+----------------------------------------- */
+.photos-page .wrap {
+  background: var(--color-bg);
+}
+
+/* -----------------------------------------
+   Lightbox viewer
+----------------------------------------- */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.lightbox-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-strong, rgba(0, 0, 0, 0.55));
+  backdrop-filter: blur(2px);
+}
+
+.lightbox-card {
+  position: relative;
+  background: var(--color-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-lightbox, 0 6px 30px rgba(0, 0, 0, 0.45));
+  padding: var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: var(--lightbox-max-w, 80vw);
+  max-height: var(--lightbox-max-h, 80vh);
+  z-index: 1;
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: var(--lightbox-img-max-h, 72vh);
+  border-radius: var(--radius-card);
+}
+
+/* -----------------------------------------
+   Lightbox buttons
+----------------------------------------- */
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  background: var(--color-accent);
+  color: #fff;
+  border: none;
+  font-size: 1.6rem;
+  width: var(--lightbox-btn-size, 42px);
+  height: var(--lightbox-btn-size, 42px);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.9;
+  transition: background var(--transition-fast), opacity var(--transition-fast);
+  z-index: 2;
+}
+
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  background: var(--color-accent-dark);
+  opacity: 1;
+}
+
+.lightbox-close {
+  top: 0;
+  right: calc(-1 * var(--lightbox-btn-offset, 56px));
+  font-size: 1.2rem;
+}
+
+.lightbox-prev,
+.lightbox-next {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox-prev {
+  left: calc(-1 * var(--lightbox-btn-offset, 56px));
+}
+
+.lightbox-next {
+  right: calc(-1 * var(--lightbox-btn-offset, 56px));
+}
+
+/* -----------------------------------------
+   Lightbox – small screens
+----------------------------------------- */
+@media (max-width: 700px) {
+  .lightbox-card {
+    max-width: var(--lightbox-max-w-sm, 92vw);
+    max-height: var(--lightbox-max-h-sm, 90vh);
+    padding: var(--space-sm);
+  }
+
+  .lightbox-prev,
+  .lightbox-next {
+    left: 8px;
+    right: 8px;
+    width: var(--lightbox-btn-size-sm, 48px);
+    height: var(--lightbox-btn-size-sm, 48px);
+    font-size: 1.8rem;
+  }
+
+  .lightbox-close {
+    top: 8px;
+    right: 8px;
+  }
+}

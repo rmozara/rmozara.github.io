@@ -1,0 +1,61 @@
+/* =========================================
+   ABOUT ME PAGE – Layout & Styling
+   -----------------------------------------
+   Purpose:
+   - Centers portrait and text in a calm single-column layout.
+   - Matches publication/essay card aesthetics.
+   - Keeps proportions balanced on all screen sizes.
+========================================= */
+
+/* --- Card structure --- */
+.about-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-lg);
+}
+
+/* --- Portrait --- */
+.profile-img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: var(--shadow-medium);
+}
+
+/* --- Text block --- */
+.about-text {
+  text-align: center;
+  color: var(--color-accent-dark);
+  font-size: var(--font-base);
+  line-height: var(--line-relaxed);
+  max-width: 65ch;
+}
+
+.about-text p {
+  margin-bottom: var(--space-md);
+}
+
+/* --- Links section --- */
+.about-links {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* --- Responsive adjustments --- */
+@media (max-width: 600px) {
+  .profile-img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .about-card {
+    padding: var(--space-lg);
+  }
+}

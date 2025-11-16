@@ -1,0 +1,66 @@
+/* =========================================
+   Global Reset & Base Typography
+   =========================================
+   Purpose:
+   - Establishes a layout-stable baseline for all browsers.
+   - Keeps element sizing consistent and predictable.
+   - Ensures text scaling and spacing remain identical across pages.
+========================================= */
+
+/* Universal box sizing model */
+*, *::before, *::after {
+  box-sizing: border-box; /* Padding + border stay inside element width */
+}
+
+/* -----------------------------------------
+   Scrollbar & Layout Stability
+----------------------------------------- */
+html {
+  overflow-y: scroll; /* Reserve space to prevent jump when pages differ in height */
+}
+
+/* -----------------------------------------
+   HTML & Body
+----------------------------------------- */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-bg); /* Unified background for consistent theme base */
+  color: var(--color-fg);      /* Base text color for all pages */
+  -webkit-text-size-adjust: 100%; /* Prevent font scaling on iOS */
+  text-size-adjust: 100%;         /* Ensure consistent scaling across browsers */
+}
+
+/* -----------------------------------------
+   Media Elements
+----------------------------------------- */
+img, svg, video, canvas {
+  max-width: 100%;     /* Make responsive inside parent containers */
+  height: auto;        /* Preserve natural aspect ratio */
+  display: block;      /* Remove inline gaps below images */
+  object-fit: contain; /* Prevent cropping in flexible layouts */
+}
+
+/* -----------------------------------------
+   Lists
+----------------------------------------- */
+ul, ol {
+  margin: 0;            /* Remove browser default spacing */
+  padding: 0;
+  list-style: none;     /* Custom list icons handled manually if needed */
+}
+
+/* -----------------------------------------
+   Tables & Forms
+----------------------------------------- */
+table {
+  border-collapse: collapse; /* Merge borders for clean layout */
+  width: 100%;               /* Full container width for consistency */
+}
+
+input, button, textarea, select {
+  font: inherit;      /* Inherit font styling from parent for visual harmony */
+  color: inherit;     /* Ensure text color consistency */
+  border: 0;          /* Remove browser default borders */
+  background: none;   /* Reset default input background */
+}

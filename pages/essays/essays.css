@@ -1,0 +1,56 @@
+/* =========================================
+   ESSAYS OVERVIEW PAGE – Content Grid
+   -----------------------------------------
+   Purpose:
+   - Controls only local grid of essay cards
+   - No sidebar geometry or global layout logic
+========================================= */
+
+/* Main essay grid inside left column */
+.essays-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Always 2 columns on desktop */
+  gap: var(--space-lg);
+  width: 100%;
+}
+
+/* Stack cards vertically on narrow screens */
+@media (max-width: 900px) {
+  .essays-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* -----------------------------------------
+   Sidebar – Local tweaks (padding + sticky)
+----------------------------------------- */
+
+/* Small left padding for sidebar */
+.wrap--sidebar .sidebar {
+  padding-left: var(--space-sm);
+}
+
+/* Sidebar sticky behavior (same as detail page) */
+body.essays-page .sidebar {
+  position: sticky !important;
+  top: calc(var(--nav-h) + var(--space-xs)) !important;
+  margin-top: 0 !important;
+  z-index: 3;
+}
+
+/* -----------------------------------------
+   Overflow & Alignment Stabilization
+   -----------------------------------------
+   Prevents clipping, matches essay-detail-page,
+   ensures stable sticky behavior.
+----------------------------------------- */
+
+body.essays-page,
+body.essays-page .wrap,
+body.essays-page .wrap-inner {
+  overflow: visible !important;
+}
+
+body.essays-page .wrap-inner {
+  align-items: start !important;
+}

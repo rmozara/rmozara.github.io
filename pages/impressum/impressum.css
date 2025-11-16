@@ -1,0 +1,54 @@
+/* =========================================
+   IMPRESSUM PAGE — Clean informational card
+   Mirrors About-Me proportions
+========================================= */
+
+/* --- Card --- */
+.impressum-card {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-lg);
+  background: #fff;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-soft);
+  line-height: var(--line-relaxed);
+  color: var(--color-accent-dark);
+}
+
+.impressum-card h2,
+.impressum-card h3 {
+  color: var(--color-fg);
+  text-align: left;
+}
+
+.impressum-card h2 {
+  margin-top: 0;
+  margin-bottom: var(--space-lg);
+}
+
+.impressum-card h3 {
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-sm);
+}
+
+.impressum-card p {
+  margin-bottom: var(--space-md);
+}
+
+.impressum-card hr {
+  margin: var(--space-lg) 0;
+  border: none;
+  border-top: 2px solid rgba(0, 0, 0, 0.08);
+}
+
+/* --- Page background (same as About/Contact) --- */
+.impressum-page .wrap {
+  background: var(--color-bg);
+}
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+  .impressum-card {
+    padding: var(--space-lg);
+  }
+}

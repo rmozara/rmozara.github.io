@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" class="preload">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Poems – Alma | Roberto Mozara</title>
+
+  <!-- ========== STYLES ========== -->
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+  <link rel="stylesheet" href="poems.css">
+
+  <!-- ========== PREFETCH ========== -->
+  <link rel="prefetch" href="../../partials/header-simple.html">
+  <link rel="prefetch" href="../../partials/footer.html">
+</head>
+
+<body class="poems-page">
+
+  <!-- =========================================
+       MAIN CONTENT – Dynamic header/footer
+  ========================================= -->
+  <div class="wrap">
+    <div class="wrap-inner">
+
+      <section class="poems-layout">
+
+        <!-- INTRO CARD -->
+        <article class="txt-card intro">
+          <h2>Poems by Alma</h2>
+          <p>A collection of poems with images, born from encounters with the self and the world,
+             sometimes carrying a spiritual undertone, sometimes rooted simply in the immediacy of life.</p>
+        </article>
+
+        <!-- BOOK VIEWER -->
+        <div class="book-container">
+          <button id="prev" class="nav-btn" aria-label="Previous page">‹</button>
+
+          <div class="book-frame">
+            <div id="book" class="book"></div>
+          </div>
+
+          <button id="next" class="nav-btn" aria-label="Next page">›</button>
+        </div>
+
+        <!-- Hover-Reveal Sidebar -->
+        <div class="sidebar-hover">
+          <div class="sidebar-strip">› Contents</div>
+          <div class="sidebar-panel">
+            <h3>Contents</h3>
+            <ul class="poem-list">
+              <li><a href="#poem-1">Ein anderer Tag</a></li>
+              <li><a href="#poem-2">Taube im blattlosen Baum</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="copyright">
+          © Alma. All poems and photographs by Alma remain the property of the author.
+          Selected decorative images and background textures are sourced from public-domain
+          or license-free resources.
+        </p>
+
+      </section>
+
+    </div>
+  </div>
+
+  <!-- =========================================
+       LIGHTBOOK / HOVER LOGIC
+  ========================================= -->
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const sidebar = document.querySelector(".sidebar-hover");
+    if (!sidebar) return;
+    const strip = sidebar.querySelector(".sidebar-strip");
+    const panel = sidebar.querySelector(".sidebar-panel");
+    let hoverTimer;
+
+    const openSidebar = () => {
+      clearTimeout(hoverTimer);
+      sidebar.classList.add("active");
+    };
+
+    const closeSidebar = () => {
+      hoverTimer = setTimeout(() => {
+        sidebar.classList.remove("active");
+      }, 150);
+    };
+
+    strip.addEventListener("mouseenter", openSidebar);
+    strip.addEventListener("mouseleave", closeSidebar);
+    panel.addEventListener("mouseenter", openSidebar);
+    panel.addEventListener("mouseleave", closeSidebar);
+  });
+  </script>
+
+  <!-- =========================================
+       SCRIPTS – Passive UI logic
+  ========================================= -->
+  <script defer src="../../../assets/js/loadPartials.js"></script>
+  <script defer src="https://unpkg.com/lucide@0.422.0/dist/umd/lucide.js"></script>
+  <script defer src="../../../assets/js/main.js"></script>
+  <script defer src="poems.js"></script>
+</body>
+</html>

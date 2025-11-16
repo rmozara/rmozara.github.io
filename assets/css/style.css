@@ -1,0 +1,26 @@
+/* =========================================
+   Global Style Entrypoint
+   -----------------------------------------
+   Purpose:
+   - Collects all partials in correct dependency order.
+   - Each section focuses on one level of abstraction.
+========================================= */
+
+/* === 1. Base === */
+@import url('base/_tokens.css');
+@import url('base/_reset.css');
+@import url('base/_typography.css');
+
+/* === 2. Layout systems === */
+@import url('layout/_structure.css');
+@import url('layout/_sidebar.css');
+@import url('layout/_nav.css');
+@import url('layout/_header.css');
+@import url('layout/_feature.css');
+@import url('layout/_pdf.css');
+@import url('layout/_footer.css');
+
+/* === 3. Reusable components === */
+@import url('components/_cards.css');
+@import url('components/_buttons.css');
+@import url('components/_scrollbars.css');

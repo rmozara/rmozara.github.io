@@ -1,0 +1,42 @@
+/* =========================================
+   ABOUT THIS SITE – CARD & CONTENT
+   =========================================
+   Purpose:
+   - Matches contact/publications layout
+   - Sharp card corners, balanced spacing
+   - Centered text block within .wrap/.col
+========================================= */
+
+.about-card {
+  padding: var(--space-lg);
+  border-radius: 0; /* sharp corners */
+  background: var(--color-bg);
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: var(--line-relaxed);
+}
+
+.about-card h2 {
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-sm);
+  font-size: var(--font-md);
+  color: var(--color-fg);
+}
+
+.about-card p,
+.about-card li {
+  color: var(--color-accent-dark);
+  font-size: var(--font-base);
+}
+
+.about-card ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: var(--space-md);
+}
+
+.about-card hr {
+  border: none;
+  border-top: var(--divider);
+  margin: var(--space-md) 0;
+}
