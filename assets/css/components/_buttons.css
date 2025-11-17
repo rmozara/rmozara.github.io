@@ -36,14 +36,14 @@
 
 /* Outline variant */
 .extra-btn--outline {
-  background: var(--color-card);
-  color: var(--color-accent-dark);
-  border: 1.5px solid var(--color-accent-dark);
+  background: none;
+  color: var(--color-bg);
+  border: 2px solid var(--color-bg);
 }
 .extra-btn--outline:hover {
-  background: rgba(var(--color-blue-soft-rgb), 0.12);
-  color: var(--color-blue-soft);
-  border-color: var(--color-blue-soft);
+  background: rgba(var(--color-bg-rgb), 0.12);
+  color: var(--color-bg);
+  border-color: var(--color-bg);
 }
 
 /* Remove underline globally */

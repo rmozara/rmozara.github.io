@@ -4,7 +4,9 @@
   // -----------------------------------------
   const parts = location.pathname.split("/").filter(Boolean);
   const depth = parts.length <= 1 ? "" : "../".repeat(parts.length - 1);
-  const isHome = parts.length === 0 || parts[0] === "index.html";
+
+  // Home = nur "/" oder "/index.html"
+  const isHome = parts.length === 0 || (parts.length === 1 && parts[0] === "index.html");
 
   // -----------------------------------------
   // Load header partial
@@ -21,12 +23,39 @@
   // -----------------------------------------
   // Highlight active navigation link
   // -----------------------------------------
-  let current = parts[parts.length - 2] || "home";
-  if (parts.includes("essays")) current = "essays"; // active for all essay subpages
+  let current;
+
+  if (isHome) {
+    // Home-Seite → Home-Link aktiv machen
+    current = "index.html";
+  } else if (parts.includes("essays")) {
+    // alle Essay-Unterseiten
+    current = "essays";
+  } else {
+    // sonst Ordner vor index.html, z.B. "about-me"
+    current = parts[parts.length - 2] || "";
+  }
 
   document.querySelectorAll(".nav .links a").forEach(a => {
-    const href = a.getAttribute("href");
-    if (href && href.includes(current)) {
+    const href = a.getAttribute("href") || "";
+
+    // Home: explizit den Home-Link markieren
+    if (isHome) {
+      const isHomeLink =
+        href === "/" ||
+        href === "index.html" ||
+        href === "./";
+
+      if (isHomeLink) {
+        a.classList.add("active");
+        a.setAttribute("aria-current", "page");
+      }
+
+      return; // verhindert Aktivierung anderer Links
+    }
+
+    // Unterseiten: wie bisher, aber nur wenn current nicht leer
+    if (!isHome && current && href.includes(current)) {
       a.classList.add("active");
       a.setAttribute("aria-current", "page");
     }
@@ -65,13 +94,11 @@
     .then(html => {
       document.body.insertAdjacentHTML("beforeend", html);
 
-      // IMPORTANT: span id must be "year" in footer.html
       const yearEl = document.getElementById("year");
       if (yearEl) {
         yearEl.textContent = new Date().getFullYear();
       }
 
-      // Initialize icons again so footer icons are processed too
       if (window.lucide) {
         lucide.createIcons();
       }
@@ -97,7 +124,6 @@
   document.addEventListener("headerLoaded", () => {
     const sidebar = document.querySelector(".sidebar");
     if (sidebar) {
-      // Force reflow so sticky positioning recalculates correctly
       requestAnimationFrame(() => {
         sidebar.style.position = "relative";
         void sidebar.offsetHeight; // trigger reflow
