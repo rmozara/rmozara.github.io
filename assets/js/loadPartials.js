@@ -49,7 +49,7 @@
   const headerFile = isHome ? "header-home.html" : "header-simple.html";
 
   try {
-    const headerHTML = await fetch(fix("/partials/" + headerFile))
+    const headerHTML = await fetch(fix("partials/" + headerFile))
       .then(r => r.text());
 
     document.body.insertAdjacentHTML("afterbegin", headerHTML);
@@ -90,7 +90,7 @@
      ============================================================ */
 
   try {
-    const titleData = await fetch(fix("/assets/js/pageTitles.json"))
+    const titleData = await fetch(fix("assets/js/pageTitles.json"))
       .then(r => r.json());
 
     const folder =
@@ -119,7 +119,7 @@
      ============================================================ */
 
   try {
-    const footerHTML = await fetch(fix("/partials/footer.html"))
+    const footerHTML = await fetch(fix("partials/footer.html"))
       .then(r => r.text());
 
     document.body.insertAdjacentHTML("beforeend", footerHTML);
