@@ -1,34 +1,23 @@
 (async () => {
 
   /* ============================================================
-     0. BASIC PATH INFO (NO REPO PREFIX NEEDED)
+     0. DEPTH SENSING FOR CORRECT RELATIVE PATHS
      ============================================================ */
 
-  const parts = location.pathname.split("/").filter(Boolean);
-
-  // We always use absolute paths (starting with "/") in HTML,
-  // so fix() just returns the path unchanged.
-  const fix = (path) => path;
+  // Example:
+  // "/" → depthParts = [] → prefix = ""
+  // "/pages/essays/index.html" → ["pages","essays","index.html"] → prefix = "../../"
+  const depthParts = location.pathname.split("/").filter(Boolean);
+  const prefix = "../".repeat(Math.max(0, depthParts.length - 1));
 
 
   /* ============================================================
-     1. APPLY PATH FIXES (CURRENTLY A NO-OP BUT KEEPS data-src LOGIC)
+     1. APPLY PATH FIXES (ONLY FOR data-src)
      ============================================================ */
 
   const applyPathFixes = () => {
-    // <img data-src="/assets/...">
     document.querySelectorAll("[data-src]").forEach(el => {
-      el.src = fix(el.dataset.src);
-    });
-
-    // <img src="/assets/...">
-    document.querySelectorAll("img[src^='/']").forEach(img => {
-      img.src = fix(img.getAttribute("src"));
-    });
-
-    // <a href="/pages/...">
-    document.querySelectorAll("a[href^='/']").forEach(a => {
-      a.href = fix(a.getAttribute("href"));
+      el.src = prefix + el.dataset.src.replace(/^\//, "");
     });
   };
 
@@ -38,8 +27,8 @@
      ============================================================ */
 
   const isHome =
-    parts.length === 0 ||                          // "/"
-    (parts.length === 1 && parts[0] === "index.html"); // "/index.html"
+    depthParts.length === 0 ||
+    (depthParts.length === 1 && depthParts[0] === "index.html");
 
 
   /* ============================================================
@@ -49,7 +38,7 @@
   const headerFile = isHome ? "header-home.html" : "header-simple.html";
 
   try {
-    const headerHTML = await fetch(fix("partials/" + headerFile))
+    const headerHTML = await fetch(prefix + "partials/" + headerFile)
       .then(r => r.text());
 
     document.body.insertAdjacentHTML("afterbegin", headerHTML);
@@ -62,7 +51,7 @@
 
 
   /* ============================================================
-     4. ACTIVE NAVIGATION HIGHLIGHT
+     4. ACTIVE NAVIGATION HIGHLIGHTING
      ============================================================ */
 
   let current = "";
@@ -70,11 +59,11 @@
   if (isHome) {
     current = "home";
   } else {
-    if (parts.includes("essays")) current = "essays";
-    else if (parts.includes("publications")) current = "publications";
-    else if (parts.includes("photos-poems")) current = "photos-poems";
-    else if (parts.includes("about-me")) current = "about-me";
-    else if (parts.includes("contact")) current = "contact";
+    if (depthParts.includes("essays")) current = "essays";
+    else if (depthParts.includes("publications")) current = "publications";
+    else if (depthParts.includes("photos-poems")) current = "photos-poems";
+    else if (depthParts.includes("about-me")) current = "about-me";
+    else if (depthParts.includes("contact")) current = "contact";
   }
 
   document.querySelectorAll(".nav .links a").forEach(a => {
@@ -86,15 +75,15 @@
 
 
   /* ============================================================
-     5. PAGE TITLES (JSON)
+     5. PAGE TITLES FROM JSON
      ============================================================ */
 
   try {
-    const titleData = await fetch(fix("assets/js/pageTitles.json"))
+    const titleData = await fetch(prefix + "assets/js/pageTitles.json")
       .then(r => r.json());
 
     const folder =
-      parts.length >= 2 ? parts[parts.length - 2] : "";
+      depthParts.length >= 2 ? depthParts[depthParts.length - 2] : "";
 
     const spec = titleData[folder];
 
@@ -115,11 +104,11 @@
 
 
   /* ============================================================
-     6. LOAD FOOTER
+     6. LOAD FOOTER PARTIAL
      ============================================================ */
 
   try {
-    const footerHTML = await fetch(fix("partials/footer.html"))
+    const footerHTML = await fetch(prefix + "partials/footer.html")
       .then(r => r.text());
 
     document.body.insertAdjacentHTML("beforeend", footerHTML);
@@ -151,7 +140,7 @@
 
 
   /* ============================================================
-     8. SIDEBAR FIX FOR DYNAMIC HEADER
+     8. SIDEBAR FIX
      ============================================================ */
 
   document.addEventListener("headerLoaded", () => {
