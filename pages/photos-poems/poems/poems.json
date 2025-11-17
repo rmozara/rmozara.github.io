@@ -1,6 +1,6 @@
 {
   "cover": {
-    "image": "../../../assets/img/photos-poems/photos/img_0611.webp",
+    "image": "/assets/img/photos-poems/photos/img_0611.webp",
     "title": "Poems by Alma",
     "subtitle": "Writings and images"
   },
@@ -8,12 +8,12 @@
     {
       "title": "Ein anderer Tag",
       "text": "Mit der Sonne<br>werde ich wiederkehren<br><br>Des Lebens Feuer<br>neu entzünden<br><br>Die wahre Liebe<br>mit Euch leben<br><br>In allem Lebens<br>Einheit finden<br><br><em>2017</em>",
-      "image": "../../../assets/img/photos-poems/poems/IMG_20230102_163034.jpg"
+      "image": "/assets/img/photos-poems/poems/IMG_20230102_163034.jpg"
     },
     {
       "title": "Taube im blattlosen Baum",
       "text": "Taube im blattlosen Baum<br>putzt dein graubraun Gefieder<br>sitzt dann still und regungslos<br>spreizt die Flügel<br>und fliegst plötzlich los.<br><br>Doch kehrst du gleich wieder<br>und dein Täuberich,<br>er folgt dir nach,<br>umgurrt, umflattert dich<br>und weiß wie ich:<br><br>du bist so wunderschön,<br>o Täubchen mein,<br>schmückst Ast und Baum,<br>komm, laß dich frei’n.<br>Sie gurren aufgeregt und<br>fliegen fort zu zweien.<br><br><em>Winter 2019</em>",
-      "image": "../../../assets/img/photos-poems/external/pexels-odd-rune-falch-1661963-15632257.jpg"
+      "image": "/assets/img/photos-poems/external/pexels-odd-rune-falch-1661963-15632257.jpg"
     }
   ]
 }
