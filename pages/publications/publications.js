@@ -1,1 +1,0 @@
-// Publications page specific scripts (reserved)

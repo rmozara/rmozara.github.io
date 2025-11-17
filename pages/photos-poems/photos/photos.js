@@ -3,14 +3,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!grid) return;
 
   try {
-    const res = await fetch("photos.json");
+    const res = await fetch("/pages/photos-poems/photos/photos.json");
     const files = await res.json();
 
     // Create photo figures
     files.forEach(name => {
       const fig = document.createElement("figure");
       const img = document.createElement("img");
-      img.src = `../../../assets/img/photos-poems/photos/${encodeURIComponent(name)}`;
+      img.src = `/assets/img/photos-poems/photos/${encodeURIComponent(name)}`;
       img.alt = "Photo by Alma";
       fig.appendChild(img);
       grid.appendChild(fig);

@@ -48,6 +48,19 @@
   justify-content: center;
 }
 
+/* Fix outline buttons for bright background on the About Me page */
+.about-me-page .extra-btn--outline {
+  color: var(--color-accent-dark);          /* dunkle Textfarbe */
+  border: 1.5px solid var(--color-accent-dark);
+}
+
+.about-me-page .extra-btn--outline:hover {
+  color: var(--color-blue-soft);
+  border-color: var(--color-blue-soft);
+  background: rgba(var(--color-blue-soft-rgb), 0.06); /* leichter hover */
+}
+
+
 /* --- Responsive adjustments --- */
 @media (max-width: 600px) {
   .profile-img {

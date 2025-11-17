@@ -1,136 +1,166 @@
 (async () => {
-  // -----------------------------------------
-  // Determine depth and base path
-  // -----------------------------------------
-  const parts = location.pathname.replace(/^\//, "").split("/");
-  const relative = (path) => {
-    const depth = location.pathname.split("/").filter(Boolean).length;
-    return "../".repeat(depth) + path;
-  };
-  // Home = nur "/" oder "/index.html"
-  const isHome = parts.length === 0 || (parts.length === 1 && parts[0] === "index.html");
 
-  // -----------------------------------------
-  // Load header partial
-  // -----------------------------------------
+  /* ============================================================
+     0. BASIC PATH INFO (NO REPO PREFIX NEEDED)
+     ============================================================ */
+
+  const parts = location.pathname.split("/").filter(Boolean);
+
+  // We always use absolute paths (starting with "/") in HTML,
+  // so fix() just returns the path unchanged.
+  const fix = (path) => path;
+
+
+  /* ============================================================
+     1. APPLY PATH FIXES (CURRENTLY A NO-OP BUT KEEPS data-src LOGIC)
+     ============================================================ */
+
+  const applyPathFixes = () => {
+    // <img data-src="/assets/...">
+    document.querySelectorAll("[data-src]").forEach(el => {
+      el.src = fix(el.dataset.src);
+    });
+
+    // <img src="/assets/...">
+    document.querySelectorAll("img[src^='/']").forEach(img => {
+      img.src = fix(img.getAttribute("src"));
+    });
+
+    // <a href="/pages/...">
+    document.querySelectorAll("a[href^='/']").forEach(a => {
+      a.href = fix(a.getAttribute("href"));
+    });
+  };
+
+
+  /* ============================================================
+     2. DETECT HOME PAGE
+     ============================================================ */
+
+  const isHome =
+    parts.length === 0 ||                          // "/"
+    (parts.length === 1 && parts[0] === "index.html"); // "/index.html"
+
+
+  /* ============================================================
+     3. LOAD HEADER PARTIAL
+     ============================================================ */
+
   const headerFile = isHome ? "header-home.html" : "header-simple.html";
 
   try {
-//    const headerHTML = await fetch(`${depth}partials/${headerFile}`).then(r => r.text());
-    const headerHTML = await fetch(relative("partials/" + headerFile));
+    const headerHTML = await fetch(fix("/partials/" + headerFile))
+      .then(r => r.text());
+
     document.body.insertAdjacentHTML("afterbegin", headerHTML);
+
+    applyPathFixes();
+
   } catch (err) {
-    console.error("Failed to load header partial:", err);
+    console.error("HEADER FAILED:", err);
   }
 
-  // -----------------------------------------
-  // Highlight active navigation link
-  // -----------------------------------------
-  let current;
+
+  /* ============================================================
+     4. ACTIVE NAVIGATION HIGHLIGHT
+     ============================================================ */
+
+  let current = "";
 
   if (isHome) {
-    // Home-Seite → Home-Link aktiv machen
-    current = "index.html";
-  } else if (parts.includes("essays")) {
-    // alle Essay-Unterseiten
-    current = "essays";
+    current = "home";
   } else {
-    // sonst Ordner vor index.html, z.B. "about-me"
-    current = parts[parts.length - 2] || "";
+    if (parts.includes("essays")) current = "essays";
+    else if (parts.includes("publications")) current = "publications";
+    else if (parts.includes("photos-poems")) current = "photos-poems";
+    else if (parts.includes("about-me")) current = "about-me";
+    else if (parts.includes("contact")) current = "contact";
   }
 
   document.querySelectorAll(".nav .links a").forEach(a => {
-    const href = a.getAttribute("href") || "";
-
-    // Home: explizit den Home-Link markieren
-    if (isHome) {
-      const isHomeLink =
-        href === "/" ||
-        href === "index.html" ||
-        href === "./";
-
-      if (isHomeLink) {
-        a.classList.add("active");
-        a.setAttribute("aria-current", "page");
-      }
-
-      return; // verhindert Aktivierung anderer Links
-    }
-
-    // Unterseiten: wie bisher, aber nur wenn current nicht leer
-    if (!isHome && current && href.includes(current)) {
+    if (a.dataset.page === current) {
       a.classList.add("active");
       a.setAttribute("aria-current", "page");
     }
   });
 
-  // -----------------------------------------
-  // Inject page-specific header title from JSON
-  // -----------------------------------------
-  (async () => {
-    try {
-      const titleData = await fetch(`${depth}assets/js/pageTitles.json`).then(r => r.json());
-      const pathParts = location.pathname.split("/").filter(Boolean);
-      const folder = pathParts.length >= 2 ? pathParts[pathParts.length - 2] : "";
-      const spec = titleData[folder];
 
-      const header = document.querySelector(".header--simple");
-      if (header && spec) {
-        const hero = document.createElement("div");
-        hero.className = "hero";
+  /* ============================================================
+     5. PAGE TITLES (JSON)
+     ============================================================ */
+
+  try {
+    const titleData = await fetch(fix("/assets/js/pageTitles.json"))
+      .then(r => r.json());
+
+    const folder =
+      parts.length >= 2 ? parts[parts.length - 2] : "";
+
+    const spec = titleData[folder];
+
+    const header = document.querySelector(".header--simple");
+    if (header && spec) {
+      const hero = header.querySelector(".hero");
+      if (hero) {
         hero.innerHTML = `
           <h1>${spec.title}</h1>
           ${spec.subtitle ? `<p class="subtitle">${spec.subtitle}</p>` : ""}
         `;
-        header.appendChild(hero);
       }
-    } catch (err) {
-      console.error("Failed to load pageTitles.json:", err);
     }
-  })();
 
-  // -----------------------------------------
-  // Load footer partial, then set year + icons
-  // -----------------------------------------
-  fetch(`${depth}partials/footer.html`)
-    .then(r => r.text())
-    .then(html => {
-      document.body.insertAdjacentHTML("beforeend", html);
+  } catch (err) {
+    console.error("TITLE JSON FAILED:", err);
+  }
 
-      const yearEl = document.getElementById("year");
-      if (yearEl) {
-        yearEl.textContent = new Date().getFullYear();
-      }
 
-      if (window.lucide) {
-        lucide.createIcons();
-      }
+  /* ============================================================
+     6. LOAD FOOTER
+     ============================================================ */
 
-      document.dispatchEvent(new Event("footerLoaded"));
-    })
-    .catch(err => {
-      console.error("Failed to load footer partial:", err);
-    });
+  try {
+    const footerHTML = await fetch(fix("/partials/footer.html"))
+      .then(r => r.text());
 
-  // -----------------------------------------
-  // Dispatch headerLoaded once (for other scripts)
-  // -----------------------------------------
-  document.dispatchEvent(new Event("headerLoaded"));
+    document.body.insertAdjacentHTML("beforeend", footerHTML);
 
-  // -----------------------------------------
-  // Reveal page (no double logic)
-  // -----------------------------------------
+    applyPathFixes();
+
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    if (window.lucide) {
+      lucide.createIcons();
+    }
+
+    document.dispatchEvent(new Event("footerLoaded"));
+
+  } catch (err) {
+    console.error("FOOTER FAILED:", err);
+  }
+
+
+  /* ============================================================
+     7. FINAL UI REVEAL
+     ============================================================ */
+
   document.documentElement.classList.remove("preload");
   document.documentElement.classList.add("ready");
 
-  // --- Sidebar position fix (for dynamically loaded header) ---
+  document.dispatchEvent(new Event("headerLoaded"));
+
+
+  /* ============================================================
+     8. SIDEBAR FIX FOR DYNAMIC HEADER
+     ============================================================ */
+
   document.addEventListener("headerLoaded", () => {
     const sidebar = document.querySelector(".sidebar");
     if (sidebar) {
       requestAnimationFrame(() => {
         sidebar.style.position = "relative";
-        void sidebar.offsetHeight; // trigger reflow
-        sidebar.style.position = ""; // revert
+        void sidebar.offsetHeight;
+        sidebar.style.position = "";
       });
     }
   });

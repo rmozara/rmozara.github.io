@@ -2,7 +2,7 @@
 window.addEventListener("DOMContentLoaded", async () => {
   try {
     // --- Load data ---
-    const res = await fetch("poems.json");
+    const res = await fetch("/pages/photos-poems/poems/poems.json");
     const data = await res.json();
 
     const book = document.getElementById("book");
