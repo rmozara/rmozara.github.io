@@ -3,7 +3,10 @@
   // Determine depth and base path
   // -----------------------------------------
   const parts = location.pathname.replace(/^\//, "").split("/");
-  const depth = parts.length <= 1 ? "" : "../".repeat(parts.length);
+  const relative = (path) => {
+    const depth = location.pathname.split("/").filter(Boolean).length;
+    return "../".repeat(depth) + path;
+  };
   // Home = nur "/" oder "/index.html"
   const isHome = parts.length === 0 || (parts.length === 1 && parts[0] === "index.html");
 
@@ -13,7 +16,8 @@
   const headerFile = isHome ? "header-home.html" : "header-simple.html";
 
   try {
-    const headerHTML = await fetch(`${depth}partials/${headerFile}`).then(r => r.text());
+//    const headerHTML = await fetch(`${depth}partials/${headerFile}`).then(r => r.text());
+    const headerHTML = await fetch(relative("partials/" + headerFile));
     document.body.insertAdjacentHTML("afterbegin", headerHTML);
   } catch (err) {
     console.error("Failed to load header partial:", err);
