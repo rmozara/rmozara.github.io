@@ -2,9 +2,8 @@
   // -----------------------------------------
   // Determine depth and base path
   // -----------------------------------------
-  const parts = location.pathname.split("/").filter(Boolean);
-  const depth = parts.length <= 1 ? "" : "../".repeat(parts.length - 1);
-
+  const parts = location.pathname.replace(/^\//, "").split("/");
+  const depth = parts.length <= 1 ? "" : "../".repeat(parts.length);
   // Home = nur "/" oder "/index.html"
   const isHome = parts.length === 0 || (parts.length === 1 && parts[0] === "index.html");
 
