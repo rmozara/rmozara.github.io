@@ -1,0 +1,91 @@
+/* =========================================
+   ESSAY CARD COMPONENT
+   -----------------------------------------
+   Purpose:
+   - Visual component used in both essay overview and detail pages.
+   - Extends the global .card design system.
+   - Self-contained styling: thumbnail, metadata, excerpt, and link.
+========================================= */
+
+/* --- Base essay card --- */
+.essay-card {
+  background: var(--color-card);
+  box-shadow: var(--shadow-medium);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  width: 100%;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+/* Hover lift effect (overview only) */
+body.essays-page .essay-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-strong);
+}
+
+/* --- Thumbnail image --- */
+.essay-thumb {
+  display: block;
+  width: 100%;
+  height: var(--essay-thumb-h);
+  object-fit: cover;
+}
+
+/* --- Inner content block --- */
+.essay-content {
+  padding: var(--space-md);
+}
+
+.essay-date {
+  color: var(--color-muted);
+  font-size: var(--font-sm);
+  margin-bottom: var(--space-xxs);
+}
+
+.essay-title {
+  font-size: var(--font-md);
+  font-weight: var(--link-font-weight);
+  margin: 0 0 var(--space-xs);
+}
+
+.essay-content hr {
+  border: none;
+  border-top: var(--divider);
+  margin: var(--space-sm) 0 var(--space-md);
+}
+
+.essay-excerpt {
+  color: var(--color-accent-dark);
+  font-size: var(--font-base);
+  line-height: var(--line-normal);
+  margin-bottom: var(--space-md);
+}
+
+/* --- Read more link --- */
+.read-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent);
+  font-weight: var(--link-font-weight);
+  text-decoration: none;
+  margin-top: var(--space-sm);
+  gap: 6px;
+  width: 100%;
+  text-align: center;
+}
+
+.read-more i {
+  width: 16px;
+  height: 16px;
+  stroke-width: var(--icon-stroke);
+}
+
+.read-more:hover {
+  color: var(--color-blue-soft);
+}
+
+/* --- Hidden search content --- */
+.essay-hidden {
+  display: none !important;
+}

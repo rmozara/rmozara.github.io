@@ -1,0 +1,82 @@
+/* =========================================
+   Cards (.card, .txt-card, .img-card)
+   =========================================
+   Purpose:
+   - Defines reusable content blocks for articles, text panels, and paired visuals.
+   - Ensures consistent shadows, radii, and spacing across all card types.
+========================================= */
+
+/* -----------------------------------------
+   .card – Generic Content Card
+----------------------------------------- */
+.card {
+  background: var(--color-card); /* Clean white background → visual lift */
+  border-radius: var(--radius-card); /* Unified soft curvature */
+  padding: var(--space-md); /* Internal content spacing */
+  margin: var(--space-md) 0; /* Vertical gap between stacked cards */
+  box-shadow: var(--shadow-medium);
+}
+
+/* Remove browser default top margin on first heading */
+.card h2 {
+  margin-top: 0;
+}
+
+/* -----------------------------------------
+   .txt-card – Floating Text Card (Left Side on Home)
+----------------------------------------- */
+/* Used primarily on homepage hero / editorial sections */
+.txt-card {
+  position: relative; /* Enables transform positioning */
+  width: 640px; /* Fixed editorial panel width (magazine layout) */
+  transform: translate(var(--tx, 0px), var(--ty, 0px)); /* Optional manual offset */
+  z-index: 2; /* Stacks above background, below overlapping visuals */
+  padding: var(--space-xl) calc(2 * var(--space-xl) + var(--space-xs));
+    /* Controlled inner spacing for balanced reading area */
+  color: var(--color-accent);
+  background: var(--color-card);
+  border-radius: var(--radius-strip);
+  box-shadow: var(--shadow-medium);
+}
+
+/* Heading inside text card */
+.txt-card h2 {
+  font-size: var(--font-baseplus); /* Fixed pixel size for zoom stability */
+  margin-bottom: 1.5em;
+  color: var(--color-fg);
+}
+
+/* Title alignment (shared between card + txt-card) */
+.card h2,
+.txt-card h2 {
+  letter-spacing: calc(var(--letter-space) * 0.5);
+  color: var(--color-fg);
+  font-weight: var(--link-font-weight);
+}
+
+/* Body text and list items inside text card */
+.txt-card p,
+.txt-card li {
+  color: var(--color-accent-dark);
+}
+
+/* -----------------------------------------
+   .img-card – Complementary Image Card (Right Side on Home)
+----------------------------------------- */
+.img-card {
+  position: relative;
+  width: 600px; /* Slightly smaller for hierarchy balance */
+  transform: translate(var(--bx, 0px), var(--by, 0px));
+  border-radius: var(--radius-strip);
+  overflow: hidden; /* Clip image corners cleanly */
+  background: var(--color-card);
+  box-shadow: var(--shadow-medium);
+  z-index: 3; /* May layer above .txt-card for overlap compositions */
+}
+
+/* Responsive image inside .img-card */
+.img-card img {
+  display: block; /* Removes inline gaps */
+  width: 100%;
+  height: auto; /* Preserve natural aspect ratio */
+}

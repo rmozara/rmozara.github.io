@@ -1,0 +1,107 @@
+/* =========================================
+   Layout Structure (Unified System)
+   -----------------------------------------
+   Roles:
+   - .wrap → outer "paper band" with shadow and footer spacing
+   - .wrap-inner → centered, max-width content grid
+   - .col → inner content column; hosts section grids (.grid-cards, etc.)
+   ========================================= */
+
+/* === Fade-in for partials === */
+html.preload body {
+  opacity: 0;
+  transition: none;
+}
+html.ready body {
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+/* -----------------------------------------
+   a) Outer wrapper – full-width paper band
+----------------------------------------- */
+.wrap {
+  position: relative;                /* z-index isolation for layers */
+  z-index: var(--z-wrap);
+  width: 100%;                       /* spans entire viewport */
+  background: var(--color-bg);       /* matches footer for reveal */
+  box-shadow: var(--shadow-strong);  /* visible page depth band */
+  overflow: visible;                 /* allow sticky and shadows to work */
+}
+
+/* Footer spacing */
+.wrap::after {
+  content: "";
+  display: block;
+  height: var(--space-xl);           /* fixed distance before footer */
+  position: relative;
+  z-index: var(--z-wrap);            /* 10 → below feature(15) and nav(20) */
+}
+
+/* -----------------------------------------
+   b) Inner container – page grid
+----------------------------------------- */
+.wrap-inner {
+  max-width: var(--layout-w);
+  margin: 0 auto;                    /* center content */
+  padding: var(--space-xl) var(--space-lg);
+  display: grid;
+  grid-template-columns: 1fr;        /* base = single column */
+  gap: var(--space-xl);
+  align-items: start;
+  overflow: visible;
+}
+
+/* -----------------------------------------
+   c) Sidebar variant (right column)
+----------------------------------------- */
+.wrap--sidebar {
+  padding-inline: 0;
+}
+
+.wrap--sidebar .wrap-inner {
+  display: grid;
+  grid-template-columns: minmax(900px, 1fr) var(--sidebar-w);
+  gap: var(--space-lg);
+  max-width: var(--layout-w);
+  margin: 0 auto;
+  align-items: start;
+  padding-inline: 0;
+}
+
+/* Essay and detail pages use full available main width */
+.essays-page .essay-card,
+.essay-detail .essay-card {
+  width: 100%;
+  max-width: none;
+}
+
+/* -----------------------------------------
+   d) Optional symmetrical variant (two equal columns)
+----------------------------------------- */
+.wrap--2col .wrap-inner {
+  grid-template-columns: 1fr 1fr;
+}
+
+/* -----------------------------------------
+   e) Column container
+----------------------------------------- */
+.col {
+  min-width: 0;   /* prevent overflow from wide children */
+  max-width: 100%;
+}
+
+/* Optional: narrower text blocks for essays */
+.col--narrow {
+  max-width: 70ch;
+}
+
+/* -----------------------------------------
+   f) Homepage – Extra Bottom Padding + Background
+----------------------------------------- */
+.homepage .wrap {
+  padding-bottom: calc(var(--footer-h) * 1.5);
+  background: var(--color-bg);
+  /* optional subtle paper effect */
+  filter: brightness(0.99) contrast(1.02);
+}

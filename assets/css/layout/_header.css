@@ -1,0 +1,134 @@
+/* =========================================
+   Header – Top Section
+   =========================================
+   Purpose:
+   - Defines the hero area with background image, overlay, and title layout.
+   - Maintains perfect pixel alignment with navigation and feature strip.
+   - Uses fixed pixel paddings for stability on zoom and scroll.
+========================================= */
+
+/* -----------------------------------------
+   Header Base – Background Image and Hero Title
+----------------------------------------- */
+.header {
+  /* Hero background image */
+  background: url('../../../assets/img/global/header.jpg') center/cover no-repeat;
+
+  /* Color / padding / stacking */
+  color: var(--color-text-light);
+  padding-top: var(--nav-h);      /* Keeps header clear below nav bar */
+  position: relative;             /* Enables ::after overlay */
+  z-index: var(--z-header);       /* ensures header stays below nav */
+}
+
+/* Dark overlay layer for text readability */
+.header::after {
+  content: "";
+  position: absolute;
+  inset: 0;                        /* shorthand for top/right/bottom/left = 0 */
+  background: var(--overlay-dark);
+  pointer-events: none;            /* Prevent overlay from blocking clicks */
+  z-index: var(--z-header);        /* keep overlay tied to header layer (below nav) */
+}
+
+/* -----------------------------------------
+   Hero Content Wrapper (.hero)
+   -----------------------------------------
+   Purpose:
+   - Centers logo and title text within the header area.
+   - Provides stable margin regardless of zoom or window width.
+----------------------------------------- */
+.header .hero {
+  position: relative;
+  z-index: calc(var(--z-header) + 1);
+  text-align: center;
+  max-width: var(--layout-w);
+  margin: var(--space-lg) auto 0;
+  padding: 0 var(--space-md);
+}
+
+/* Main site title */
+.header h1 {
+  font-weight: var(--title-font-weight);
+  letter-spacing: calc(var(--letter-space) * 0.25);
+  margin: 0;
+  font-size: var(--font-xl);
+  text-align: center;
+  text-shadow: var(--text-shadow-hero);
+}
+
+/* Subtitle below title */
+.header .subtitle {
+  margin: var(--space-sm) 0 0;
+  font-weight: var(--subtitle-font-weight);
+  font-size: var(--font-lg);
+  text-shadow: var(--text-shadow-hero);
+}
+
+/* Symbol/logo inside hero */
+.header .symbol {
+  width: var(--symbol-size);
+  height: var(--symbol-size);
+  display: block;
+  margin: 0 auto var(--space-md);
+  filter: drop-shadow(var(--text-shadow-hero));
+  background: var(--color-bg);
+  padding: var(--symbol-padding);
+  border-radius: 0; /* angular, matches visual identity */
+}
+
+/* -----------------------------------------
+   Header Variants – Homepage vs. Subpages
+----------------------------------------- */
+
+/* Homepage header (larger hero space) */
+.header--home {
+  padding-bottom: 120px; /* Fixed spacing below hero content */
+}
+
+/* Compact header variant for subpages */
+.header--simple {
+  padding-top: var(--nav-h);
+  padding-bottom: var(--space-lg);
+  position: relative;
+  color: var(--color-text-light);
+  text-align: center;
+  z-index: var(--z-header);
+}
+
+/* Hide feature strips on subpages (used in .header--simple) */
+.header--simple .header-extra-links,
+.header--simple .feature-wrap {
+  display: none;
+}
+
+/* -----------------------------------------
+   Header Extra Links – CTA Buttons
+----------------------------------------- */
+.header-extra-links {
+  margin-top: var(--space-md);
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+/* -----------------------------------------
+   Page-Specific Header Background Offsets
+   ----------------------------------------- */
+
+/* Subpage overrides */
+body.about-me-page        { --header-bg-offset-y: calc(50% + 162px); }
+body.about-site-page      { --header-bg-offset-y: calc(50% + 162px); }
+body.contact-page         { --header-bg-offset-y: calc(50% + 162px); }
+body.publications-page    { --header-bg-offset-y: calc(50% + 138px); }
+body.photos-poems-page    { --header-bg-offset-y: calc(50% + 138px); }
+body.photos-page          { --header-bg-offset-y: calc(50% + 138px); }
+body.poems-page           { --header-bg-offset-y: calc(50% + 138px); }
+body.essays-page          { --header-bg-offset-y: calc(50% + 138px); }
+body.symbol-page          { --header-bg-offset-y: calc(50% + 138px); }
+body.essay-detail-page    { --header-bg-offset-y: calc(50% + 162px); }
+body.impressum-page       { --header-bg-offset-y: calc(50% + 189px); }
+
+.header--simple {
+  background-position: center var(--header-bg-offset-y);
+}

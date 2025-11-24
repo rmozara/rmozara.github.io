@@ -1,0 +1,47 @@
+/* =========================================
+   TYPOGRAPHY — Global Text Styling
+   -----------------------------------------
+   Purpose:
+   - Defines site-wide font families, sizes, and text rhythm.
+   - Handles headings, paragraphs, and links.
+   - Complements _reset.css (no layout rules here).
+========================================= */
+
+/* -----------------------------------------
+   HTML & Body
+----------------------------------------- */
+html, body {
+  color: var(--color-fg); /* Global foreground color for readability */
+  font:
+    var(--font-base) / var(--line-normal) /* Base font size and line-height */
+    system-ui, -apple-system, "Segoe UI", /* Modern default system stack */
+    Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif; /* cross-platform fallbacks */
+}
+
+/* -----------------------------------------
+   Paragraphs
+----------------------------------------- */
+p {
+  margin: 0 0 var(--space-md); /* Maintain vertical rhythm between text blocks */
+}
+
+/* -----------------------------------------
+   Links
+----------------------------------------- */
+a {
+  color: var(--color-accent); /* Brand or highlight color for links */
+  text-decoration: none;      /* Remove default underline for cleaner appearance */
+  transition: color var(--transition-fast); /* Smooth color fade on hover/focus */
+}
+
+a:hover,
+a:focus {
+  color: var(--color-blue-soft); /* Lighter shade on interaction for feedback */
+  text-decoration: underline;    /* Underline reappears to signal interactivity */
+  outline: none;                 /* Suppress browser default outline */
+}
+
+a:focus-visible {
+  outline: 2px solid var(--color-blue-soft); /* Accessible visible focus ring */
+  outline-offset: 2px;                       /* Spacing for better visibility */
+}

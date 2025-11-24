@@ -1,0 +1,87 @@
+/* =========================================
+   Feature Strip – Bridging Header and Content
+   =========================================
+   Purpose:
+   - Floating horizontal strip linking header and main content.
+   - Hosts 4 feature "segments" (icon + label) with consistent spacing.
+========================================= */
+
+/* -----------------------------------------
+   Wrapper
+----------------------------------------- */
+.feature-wrap {
+  position: absolute;
+  bottom: var(--feature-overlap, var(--feature-overlap-default));
+  left: 0;
+  right: 0;
+  z-index: var(--z-feature);
+  pointer-events: none;
+}
+
+/* -----------------------------------------
+   Inner strip container
+----------------------------------------- */
+.feature-strip {
+  max-width: var(--layout-w);
+  margin: 0 auto;
+  pointer-events: auto;
+  display: flex;
+  justify-content: center;
+  background: var(--color-bg);
+  border: var(--border);
+  border-radius: var(--radius-strip);
+  box-shadow: var(--shadow-medium);
+  overflow: hidden;
+}
+
+/* -----------------------------------------
+   Feature segment
+----------------------------------------- */
+.feature-strip .seg {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  padding: var(--space-lg) var(--space-md);
+  color: var(--color-accent-dark);
+  text-decoration: none;
+  text-align: center;
+  transition:
+    background var(--transition-fastest),
+    color var(--transition-fastest);
+}
+
+/* Divider between segments */
+.feature-strip .seg + .seg {
+  border-left: var(--divider, 1px solid var(--color-border));
+}
+
+/* -----------------------------------------
+   Icon sizing
+----------------------------------------- */
+.feature-strip .seg svg {
+  width: var(--space-lg) !important;
+  height: var(--space-lg) !important;
+  stroke-width: var(--icon-stroke);
+  color: currentColor;
+}
+
+/* -----------------------------------------
+   Label styling
+----------------------------------------- */
+.feature-strip .seg span {
+  font-weight: var(--link-font-weight);
+  letter-spacing: var(--letter-space);
+  font-size: var(--font-md);
+  line-height: var(--line-tight);
+}
+
+/* -----------------------------------------
+   Hover state
+----------------------------------------- */
+.feature-strip .seg:hover {
+  background: rgba(var(--color-blue-soft-rgb), 0.12);
+  color: var(--color-blue-soft);
+}

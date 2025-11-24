@@ -1,0 +1,164 @@
+/* =========================================
+   Navigation – Sticky Top Bar
+   =========================================
+   Purpose:
+   - Transparent overlay over header image.
+   - Transitions smoothly into white fixed bar on scroll.
+   - Maintains constant height and shadow base.
+========================================= */
+
+/* -----------------------------------------
+   Base Navigation Container
+----------------------------------------- */
+.nav {
+  position: fixed;
+  top: var(--nav-top, 0);
+  left: var(--nav-left, 0);
+  right: var(--nav-right, 0);
+  width: auto;
+  height: var(--nav-h);
+  z-index: var(--z-nav); /* 20 */
+  background: transparent;
+  display: block;
+  margin: 0;
+  padding: 0;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  transition:
+    background var(--transition-base),
+    box-shadow var(--transition-fast);
+}
+
+/* Full-width pseudo-background for fade-in effect */
+.nav::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-h);
+  background: transparent;
+  transition:
+    background var(--transition-base),
+    box-shadow var(--transition-fast);
+  z-index: calc(var(--z-nav) - 1); /* 19 */
+}
+
+/* -----------------------------------------
+   Internal Flex Layout
+----------------------------------------- */
+.nav .bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-md);
+  max-width: var(--layout-w);
+  height: var(--nav-h);
+  margin: 0 auto;
+}
+
+.nav .links {
+  display: flex;
+  gap: var(--space-md);
+}
+
+/* Default link style (on transparent header) */
+.nav a {
+  color: var(--color-text-light);
+  font-weight: var(--link-font-weight);
+  font-size: var(--font-base);
+  padding: var(--link-pad-y) var(--link-pad-x);
+  line-height: var(--nav-h);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+/* Hover + active (transparent mode) */
+.nav a:hover,
+.nav a.active {
+  color: var(--color-blue-soft);
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 6px;
+}
+
+/* -----------------------------------------
+   Scroll State (.scrolled)
+----------------------------------------- */
+body.scrolled .nav {
+  background: var(--color-bg);
+  box-shadow:
+    0 2px 6px rgba(var(--color-fg-rgb), 0.08),
+    0 0 0 1px rgba(var(--color-fg-rgb), 0.05);
+}
+
+body.scrolled .nav::before {
+  background: var(--color-bg);
+  border-bottom: 1px solid rgba(var(--color-fg-rgb), 0.1);
+}
+
+body.scrolled .nav a {
+  color: var(--color-accent-dark);
+}
+
+body.scrolled .nav a:hover,
+body.scrolled .nav a.active {
+  color: var(--color-blue-soft);
+}
+
+/* -----------------------------------------
+   Brand Area (Logo + Name)
+----------------------------------------- */
+.nav .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-right: auto; /* pushes link group rightward */
+}
+
+/* Logo image or symbol */
+.nav-logo {
+  width: 40px;
+  height: 40px;
+  filter: drop-shadow(var(--text-shadow-hero));
+  background: var(--color-bg);
+  padding: 1px;
+  border-radius: 0;
+  position: relative;
+}
+
+/* Brand name (text link) */
+.nav .brand-name {
+  font-size: var(--font-md);
+  font-weight: 600;
+  color: var(--color-text-light);
+  letter-spacing: calc(var(--letter-space) * 0.8);
+  text-decoration: none !important;
+  transition: color var(--transition-fast);
+}
+
+.nav .brand-name:hover {
+  color: rgba(var(--color-text-light-muted), 0.85) !important;
+  cursor: pointer;
+}
+
+/* Scroll (white bar) state */
+body.scrolled .nav .brand-name {
+  color: var(--color-fg) !important;
+}
+
+body.scrolled .nav .brand-name:hover {
+  color: var(--color-muted) !important;
+}
+
+/* -----------------------------------------
+   Stacking Consistency
+----------------------------------------- */
+.nav .bar,
+.nav .links,
+.nav .brand,
+.nav a,
+.nav .brand-name,
+.nav-logo {
+  position: relative;
+  z-index: var(--z-nav);
+}

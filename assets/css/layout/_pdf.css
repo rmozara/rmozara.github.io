@@ -1,0 +1,20 @@
+/* =========================================
+   PDF Embed – Fixed Height Integration
+   =========================================
+   Purpose:
+   - Embeds PDFs or iframes with pixel-locked height for layout stability
+*/
+
+.pdf-embed {
+  background: transparent; /* Keep background empty – PDF has its own surface */
+  border-radius: 0; /* No rounding – PDFs should appear flat and integrated */
+  box-shadow: none; /* Do not apply card shadow to PDFs */
+}
+
+.pdf-embed embed,
+.pdf-embed iframe {
+  width: 100%; /* Always occupy full width of container */
+  height: var(--pdf-embed-h); /* Fixed pixel height – stable under zoom */
+  border: 0; /* Remove default border from iframe/embed */
+  display: block; /* Remove default inline spacing under embeds */
+}

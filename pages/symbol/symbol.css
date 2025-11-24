@@ -1,0 +1,82 @@
+/* =========================================
+   Symbol Page – Layout & Animation
+========================================= */
+
+/* -----------------------------------------
+   Layout – Two-Column Structure
+----------------------------------------- */
+.symbol-page .wrap-inner {
+  display: grid; /* ADDED — no visual change */
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+  align-items: start;
+  gap: var(--space-lg);
+}
+
+/* -----------------------------------------
+   Card Offsets (transform isolated)
+----------------------------------------- */
+
+.symbol-page .img-card {
+  width: 340px;
+  margin: 50px auto;
+  transform: translate(-20px, 52px);
+}
+
+.symbol-page .txt-card {
+  width: 580px;
+  margin: 0 auto;
+  transform: translate(-20px, 20px);
+}
+
+/* -----------------------------------------
+   Animation – Symbol Appearance
+----------------------------------------- */
+.symbol-page .img-card img {
+  opacity: 0;
+  transform: scale(0.9); /* CLEAN — only scale here */
+  animation: fadeInGrow 1.2s ease forwards;
+  animation-delay: 0.1s;
+}
+
+/* -----------------------------------------
+   Animation – Text Card Fade-In
+----------------------------------------- */
+.symbol-page .txt-card {
+  opacity: 0;
+  animation: fadeInText 0.8s ease-out forwards;
+  animation-delay: 1.2s; /* unchanged */
+}
+
+/* -----------------------------------------
+   Keyframes
+----------------------------------------- */
+@keyframes fadeInGrow {
+  to {
+    opacity: 1;
+    transform: scale(1); /* CLEAN — only scale */
+  }
+}
+
+@keyframes fadeInText {
+  to {
+    opacity: 1;
+  }
+}
+
+/* -----------------------------------------
+   Mobile Layout
+----------------------------------------- */
+@media (max-width: 900px) {
+  .symbol-page .wrap-inner {
+    grid-template-columns: 1fr;
+  }
+  .symbol-page .img-card,
+  .symbol-page .txt-card {
+    width: 100%;
+  }
+  .symbol-page .img-card-inner,
+  .symbol-page .txt-card-inner {
+    transform: none;
+  }
+}

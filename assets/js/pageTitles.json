@@ -1,0 +1,42 @@
+{
+  "about-me": {
+    "title": "About Me",
+    "subtitle": ""
+  },
+  "about-site": {
+    "title": "About this Site",
+    "subtitle": ""
+  },
+  "essays": {
+    "title": "Essays",
+    "subtitle": "Perspectives in physics and philosophy"
+  },
+  "publications": {
+    "title": "Publications",
+    "subtitle": "Peer-reviewed articles and research contributions"
+  },
+  "photos-poems": {
+    "title": "Photos & Poems",
+    "subtitle": "Visual and lyrical compositions by Alma"
+  },
+  "photos": {
+    "title": "Photo Gallery",
+    "subtitle": "Works by Alma"
+  },
+  "poems": {
+    "title": "Poems",
+    "subtitle": "Writings by Alma"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": ""
+  },
+  "symbol": {
+    "title": "The Symbol",
+    "subtitle": "Its geometry and meaning"
+  },
+  "lorentz-transformations": {
+    "title": "Local Lorentz Transformations and Curvature",
+    "subtitle": ""
+  }
+}

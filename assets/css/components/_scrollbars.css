@@ -1,0 +1,24 @@
+/* =========================================
+/* Thin Scrollbar Utility
+   =========================================
+   Purpose:
+   - Provides a reusable class for thin scrollbars on any
+     overflow container.
+========================================= */
+
+.scroll-thin {
+  scrollbar-width: thin;
+}
+
+.scroll-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.18);
+  border-radius: 4px;
+}
+
+.scroll-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(0,0,0,0.28);
+}

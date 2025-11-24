@@ -1,0 +1,106 @@
+/* =========================================
+   Sidebar — Unified (Overview + Detail)
+   -----------------------------------------
+   Purpose:
+   - Provides a consistent sticky sidebar for essays overview
+     and detail pages.
+   - Uses shared spacing, radius, and color tokens.
+========================================= */
+
+/* -----------------------------------------
+   Base Sidebar Container
+----------------------------------------- */
+.sidebar,
+#essaySidebar {
+  position: sticky;
+  top: calc(var(--nav-h) + var(--space-xs)); /* aligns just below nav */
+  align-self: start;
+  height: fit-content;
+  width: var(--sidebar-w);
+  max-width: var(--sidebar-w);
+  flex: 0 0 var(--sidebar-w);
+  margin-right: var(--space-sm);
+  background: var(--color-bg);
+  padding: var(--space-md);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-light);
+  box-sizing: border-box;
+  z-index: 3;
+  transition: box-shadow var(--transition-base);
+}
+
+/* -----------------------------------------
+   Search Box
+----------------------------------------- */
+.sidebar .search-box input,
+#essaySidebar .search-box input {
+  width: 100%;
+  padding: var(--space-xs) var(--space-sm);
+  border: var(--border);
+  border-radius: var(--radius-round);
+  font-size: var(--font-base);
+  box-sizing: border-box;
+  margin-left: calc(-1 * var(--space-xxs)); /* optical alignment fine-tune */
+}
+
+/* -----------------------------------------
+   Recent Posts Section
+----------------------------------------- */
+.sidebar .recent-posts,
+#essaySidebar .recent-posts {
+  width: 100%;
+  max-width: calc(var(sidebar-w) - 20px);
+  margin-top: var(--space-md);
+}
+
+.sidebar .recent-posts h3,
+#essaySidebar .recent-posts h3 {
+  font-size: var(--font-md);
+  color: var(--color-accent-dark) !important;
+  margin-bottom: var(--space-sm);
+  border-bottom: var(--border);
+  padding-bottom: var(--space-xs);
+  text-align: left;
+}
+
+.sidebar .recent-posts ul,
+#essaySidebar .recent-posts ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar .recent-posts li,
+#essaySidebar .recent-posts li {
+  margin-bottom: var(--space-sm);
+}
+
+.sidebar .recent-posts a,
+#essaySidebar .recent-posts a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.sidebar .recent-posts a:hover,
+#essaySidebar .recent-posts a:hover {
+  color: var(--color-blue-soft);
+  text-decoration: underline;
+}
+
+/* -----------------------------------------
+   Sticky Behavior Adjustments (Overview)
+----------------------------------------- */
+/* Ensure sticky works after partial loads and transitions */
+body.essays-page .wrap-inner {
+  overflow: visible !important;
+}
+
+/* Fine-tune vertical alignment after navigation reload */
+body.essays-page .sidebar {
+  margin-top: calc(-1 * var(--space-sm));
+}
+
+body.essays-page .sidebar {
+  top: calc(var(--nav-h) + var(--space-xs)); /* same as essay-detail */
+}

@@ -1,0 +1,252 @@
+/* =========================================
+   Root Variables – Unified Design System
+   =========================================
+   Purpose:
+   - Centralized design tokens for all layout, color, and typographic values.
+   - Enables consistent spacing and visual rhythm across every page.
+   - Includes extended variables for essay and publication layouts.
+   - Each variable can be referenced anywhere via var(--token-name).
+   - All layout, color, and font adjustments happen here first.
+========================================= */
+
+:root {
+
+  /* =========================================
+     Color System
+     -----------------------------------------
+     Base tones, neutral grays, accent palette,
+     and helper values for rgba() blending.
+  ========================================= */
+  --color-bg: #fbfbfb;               /* Base background (paper/page) */
+  --color-bg-rgb: 255,255,255;       /* RGB equivalent for rgba() blends */
+  --color-fg: #111111;               /* Primary text color (almost black) */
+  --color-fg-rgb: 17,17,17;
+  --color-accent: #1b7fd0;           /* Main accent blue for links & highlights */
+  --color-accent-dark: #345e8f;      /* Darker tone of accent blue */
+  --color-blue-soft: #6faaff;        /* Soft hover / highlight tone */
+  --color-blue-soft-rgb: 111,170,255;
+  --color-card: #ffffff;             /* Card surface background */
+  --color-border-light: #e6e8eb;     /* Soft neutral divider tone */
+  --color-text-light: #e6e6e6;       /* Light text on dark backgrounds */
+  --color-text-light-muted: 230,230,230; /* Dimmed white for subtle hover states */
+
+  /* === Derived Colors === */
+  --color-muted: rgba(var(--color-fg-rgb), 0.6);
+  --color-border: rgba(var(--color-fg-rgb), 0.1);
+  --overlay-dark: rgba(var(--color-fg-rgb), 0.65);
+
+  /* =========================================
+     z-index Hierarchy
+     -----------------------------------------
+     Purpose:
+     - Controls which layers overlap visually.
+     - Higher numbers appear above lower ones.
+     - Centralized to avoid stacking conflicts.
+  ========================================= */
+  --z-footer: 1;               /* Base layer (lowest) */
+  --z-wrap: 5;                 /* Main content “paper” */
+  --z-header: 10;              /* Header background image */
+  --z-feature: 15;             /* Feature strip overlapping header */
+  --z-nav: 20;                 /* Navigation bar (highest fixed layer) */
+
+  /* =========================================
+     Layout Dimensions
+     -----------------------------------------
+     Purpose:
+     - Global geometric anchors for all layouts.
+     - Each component respects these for consistency.
+  ========================================= */
+  --layout-w: 1200px;          /* Shared max-width for centered sections */
+  --content-w: 880px;          /* Max width for text-heavy pages */
+  --sidebar-w: 280px;          /* Standard sidebar width (used site-wide) */
+  --sidebar-gap: 64px;         /* Visual gap between content and sidebar */
+  --nav-h: 80px;               /* Navigation bar height */
+  --footer-h: 120px;           /* Footer reveal height */
+  --pdf-embed-h: 700px;        /* Fixed PDF embed height for stable layout */
+  --essay-thumb-h: 220px;      /* Unified height for essay thumbnails */
+
+  /* =========================================
+     Grid Ratios
+     -----------------------------------------
+     Purpose:
+     - Controls proportional width of columns in grid layouts.
+     - Changing these values globally adjusts both overview and detail pages.
+  ========================================= */
+  --essay-col-1: 2fr;          /* Left essay column (overview) */
+  --essay-col-2: 2fr;          /* Right essay column (overview) */
+  --essay-sidebar: 0.8fr;      /* Sidebar column ratio (overview) */
+  --grid-gap: var(--space-xl); /* Default gap between grid columns */
+
+  /* =========================================
+     Navigation Anchors
+     -----------------------------------------
+     Purpose:
+     - Used by .nav and JS scroll handlers to position fixed bars.
+     - Keeps nav height consistent across all pages.
+  ========================================= */
+  --nav-top: 0;
+  --nav-left: 0;
+  --nav-right: 0;
+
+  /* =========================================
+     Spacing System
+     -----------------------------------------
+     Purpose:
+     - Modular scale for all padding, margins, and grid gaps.
+     - Used consistently for vertical rhythm and balanced design.
+     - Avoids hard-coded pixel gaps outside this system.
+  ========================================= */
+  --space-xxs: 4px;            /* Hairline adjustments */
+  --space-xs: 8px;             /* Extra small spacing */
+  --space-sm: 12px;            /* Small gaps, padding for compact elements */
+  --space-md: 24px;            /* Medium spacing for general layout */
+  --space-ml: 36px;            /* Medium-large step between md and lg */
+  --space-lg: 48px;            /* Large vertical rhythm / section spacing */
+  --space-xl: 64px;            /* Extra large step, used in grids */
+
+  /* =========================================
+     Radii System
+     -----------------------------------------
+     Purpose:
+     - Defines corner rounding styles.
+     - Use tokens rather than pixel values for consistency.
+  ========================================= */
+  --radius-strip: 4px;         /* Subtle rounding (feature strips) */
+  --radius-card: 14px;         /* Softer card corners */
+  --radius-round: 24px;        /* Fully rounded shapes (buttons, pills) */
+
+  /* =========================================
+     Typography Scale
+     -----------------------------------------
+     Purpose:
+     - Global font sizing for titles, subtitles, and body text.
+  ========================================= */
+  --font-xl: 38px;             /* Hero titles */
+  --font-lg: 26px;             /* Subtitles / section headers */
+  --font-baseplus: 20px;       /* Between base and lg */
+  --font-md: 18px;             /* Mid-size labels, feature text */
+  --font-base: 16px;           /* Normal body text */
+  --font-btn: 15px;            /* Button text (slightly smaller) */
+  --font-sm: 14px;             /* Fine print or footer text */
+  --letter-space: 0.05em;      /* Slight tracking for crispness */
+  --line-tight: 1.1;           /* Compact line-height for labels */
+  --line-normal: 1.4;          /* Standard paragraph line-height */
+  --line-relaxed: 1.7;         /* Relaxed line-height for cards */
+
+  /* =========================================
+     Typography Weights
+     -----------------------------------------
+     Purpose:
+     - Semantic weight tokens for consistent emphasis.
+  ========================================= */
+  --title-font-weight: 500;    /* Hero titles */
+  --subtitle-font-weight: 300; /* Subtitles */
+  --link-font-weight: 700;     /* Links / feature labels / buttons */
+
+  /* =========================================
+     Shadow System
+     -----------------------------------------
+     Purpose:
+     - Creates elevation and depth without overuse.
+     - Used by cards, nav, and feature strips.
+  ========================================= */
+  --shadow-soft: 0 8px 22px rgba(0, 0, 0, 0.06);    /* Gentle ambient shadow */
+  --shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.12); /* Moderate lift */
+  --shadow-strong: 0 16px 36px rgba(0, 0, 0, 0.22); /* Deep contrast lift */
+  --shadow-book: 0 6px 24px rgba(0,0,0,0.12); /* Book — page shadow (used in poems flipbook) */
+  --text-shadow-hero: 0 1px 2px rgba(0, 0, 0, .35); /* Improves text readability on images */
+
+  /* =========================================
+     Logo Dimensions
+     -----------------------------------------
+     Purpose:
+     - Shared symbol/logo parameters for all headers.
+  ========================================= */
+  --symbol-size: 108px;        /* Square dimension for hero logo */
+  --symbol-padding: 2px;       /* White frame around logo */
+
+  /* =========================================
+     Dividers, Icons & Overlaps
+     -----------------------------------------
+     Purpose:
+     - Minor but globally used styling constants.
+     - Keep all subtle borders and line weights consistent.
+  ========================================= */
+  --divider: 1px solid var(--color-border-light);  /* Thin separators */
+  --border: 1px solid var(--color-border);
+  --icon-stroke: 1.5;                              /* Line thickness for SVG icons */
+  --feature-overlap-default: -120px;               /* Default upward offset for feature strip */
+
+  /* =========================================
+     Motion & Transitions
+     -----------------------------------------
+     Purpose:
+     - Defines default animation timing and curves.
+  ========================================= */
+  --transition-base: 0.3s ease;           /* Moderate UI transitions */
+  --transition-fast: 0.2s ease-in-out;    /* Buttons, small hovers */
+  --transition-fastest: 0.15s ease-in-out;/* Micro interactions (icons, highlights) */
+  --transition-page: 0.7s ease;           /* Used for poem book pages */
+
+  /* =========================================
+     Link Padding & Hit Areas
+     -----------------------------------------
+     Purpose:
+     - Expands click targets for accessibility without layout shift.
+  ========================================= */
+  --link-pad-y: 2px;
+  --link-pad-x: 2px;
+
+  /* =========================================
+     Flipbook Geometry
+     -----------------------------------------
+     Purpose:
+     - Provides consistent dimensions for the
+       poems flipbook (book-frame, pages, spreads).
+  ========================================= */
+  --book-w: 900px;      /* Full spread width */
+  --book-h: 600px;      /* Full spread height */
+
+  /* =========================================
+     Navigation Button Geometry
+     -----------------------------------------
+     Purpose:
+     - Controls size of the ‹ › navigation arrows.
+  ========================================= */
+  --nav-btn-size: 48px;     /* button width/height */
+
+  /* =========================================
+     Photos Page – Gallery & Lightbox
+     -----------------------------------------
+     Purpose:
+     - Controls intro card width, masonry columns,
+       and lightbox geometry for photos page.
+  ========================================= */
+  --photos-intro-w: 760px;        /* Fixed width of intro text card on desktop */
+
+  --photos-cols-lg: 3;            /* Masonry columns on large screens */
+  --photos-cols-md: 2;            /* Masonry columns on medium screens */
+  --photos-cols-sm: 1;            /* Masonry columns on small screens */
+
+  --overlay-strong: rgba(0, 0, 0, 0.55); /* Strong dark overlay for lightbox */
+
+  --shadow-lightbox: 0 6px 30px rgba(0, 0, 0, 0.45); /* Deeper shadow for lightbox card */
+
+  --lightbox-max-w: 80vw;         /* Max width of lightbox card (desktop) */
+  --lightbox-max-h: 80vh;         /* Max height of lightbox card (desktop) */
+  --lightbox-img-max-h: 72vh;     /* Max height of image inside lightbox */
+
+  --lightbox-max-w-sm: 92vw;      /* Max width of lightbox on small screens */
+  --lightbox-max-h-sm: 90vh;      /* Max height of lightbox on small screens */
+
+  --lightbox-btn-size: 42px;      /* Diameter of lightbox nav/close buttons */
+  --lightbox-btn-size-sm: 48px;   /* Larger buttons on small screens */
+  --lightbox-btn-offset: 56px;    /* Horizontal offset pushing prev/next & close outside card */
+
+  /* =========================================
+     HEADER TOKENS — Background & Hero Offsets
+     ========================================= */
+
+  --header-bg-offset-y: 50%;   /* Default: Home page */
+
+}

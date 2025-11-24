@@ -1,0 +1,420 @@
+/* =========================================================
+   POEMS PAGE
+   ========================================================= */
+
+/* -----------------------------------------
+   Layout
+----------------------------------------- */
+.poems-page .wrap-inner {
+  max-width: var(--layout-w);
+  margin: 0 auto;
+  padding-top: var(--space-xl);
+  text-align: center;
+}
+
+.poems-page .intro {
+  background: var(--color-card);
+  box-shadow: var(--shadow-soft);
+  border-radius: var(--radius-card);
+  padding: var(--space-lg);
+  margin: 0 auto var(--space-xl);
+  width: var(--photos-intro-w, 760px);
+  text-align: center;
+}
+
+/* Make the poems intro card identical to the photos intro card */
+.poems-page .txt-card {
+  background: var(--color-card);
+  box-shadow: var(--shadow-soft);
+  border-radius: var(--radius-card);
+  padding: var(--space-lg);
+  text-align: center;
+  margin: 0 auto var(--space-lg);
+  width: var(--photos-intro-w, 760px);
+}
+.poems-page .txt-card h2 {
+  margin-top: 0;
+  letter-spacing: calc(var(--letter-space) * 0.5);
+  color: var(--color-fg);
+}
+.poems-page .txt-card p {
+  color: var(--color-accent-dark);
+  line-height: var(--line-relaxed);
+  margin-bottom: 0;
+}
+
+/* -----------------------------------------
+   Book container
+----------------------------------------- */
+.book-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.book-frame {
+  width: var(--book-w);
+  height: var(--book-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* -----------------------------------------
+   Navigation arrows
+----------------------------------------- */
+.nav-btn {
+  background: var(--color-accent);
+  color: var(--color-text-light);
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  border-radius: 50%;
+  width: var(--nav-btn-size);
+  height: var(--nav-btn-size);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-btn:hover {
+  background: var(--color-accent-dark);
+}
+
+/* -----------------------------------------
+   Book viewport
+----------------------------------------- */
+#book {
+  background: transparent;
+  position: relative;
+  overflow: visible;
+}
+
+/* -----------------------------------------
+   Flipbook system
+----------------------------------------- */
+.book {
+  width: var(--book-w);
+  height: var(--book-h);
+  position: relative;
+  overflow: hidden;
+}
+
+.book--single { width: calc(var(--book-w) / 2); }
+.book--double { width: var(--book-w); }
+
+.spread {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  gap: 0;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateX(var(--dx, 20px));
+  transition: opacity var(--transition-page), transform var(--transition-page);
+}
+
+.spread--double { grid-template-columns: 1fr 1fr; }
+.spread--single { grid-template-columns: 1fr; }
+
+.spread.active {
+  opacity: 1;
+  transform: translateX(0);
+  z-index: 2;
+}
+
+.spread.fading .page {
+  opacity: 0;
+}
+
+/* -----------------------------------------
+   Universal page card
+----------------------------------------- */
+.page {
+  width: 100%;
+  height: 100%;
+  background: var(--color-card);
+  overflow: hidden;
+  display: flex;
+  position: relative;
+  z-index: 2;
+  box-shadow: var(--shadow-book);
+  border-radius: var(--radius-card);
+}
+
+/* -----------------------------------------
+   Cover
+----------------------------------------- */
+.cover {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+}
+
+.cover__overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.35);
+}
+
+.cover__inner {
+  position: absolute; inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  color: #fff;
+  padding: var(--space-lg);
+}
+.cover__inner h2 { margin: 0; font-size: var(--font-lg); }
+
+/* -----------------------------------------
+   Photo page
+----------------------------------------- */
+.page--photo {
+  align-items: center;
+  justify-content: center;
+  background: var(--color-card);
+}
+
+.page--photo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* -----------------------------------------
+   Poem page
+----------------------------------------- */
+.page--poem {
+  padding: var(--space-lg);
+  text-align: center;
+  line-height: var(--line-relaxed);
+  background: var(--color-card);
+}
+
+.page--poem .poem {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.page--poem h3 {
+  margin: 0 0 var(--space-sm) 0;
+}
+
+.page--poem .poem__scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: var(--space-sm);
+}
+
+.page--poem pre {
+  margin: 0;
+  white-space: pre-wrap;
+  font-family: inherit;
+  text-align: center;
+  line-height: inherit;
+}
+
+/* -----------------------------------------
+   Closing page
+----------------------------------------- */
+.closing {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-content: center;
+  text-align: center;
+}
+
+/* -----------------------------------------
+   Single-page alignment
+----------------------------------------- */
+.page--single {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.page--right { right: 0; left: auto; }
+.page--left  { left: 0; right: auto; }
+
+/* -----------------------------------------
+   Responsive
+----------------------------------------- */
+@media (max-width: 1000px) {
+  .book-frame { width: 600px; height: 400px; }
+  .book--double { width: 600px; }
+  .book--single { width: 300px; }
+}
+
+@media (max-width: 700px) {
+  .book-frame { width: 90vw; height: 60vw; }
+  .book--double { width: 90vw; }
+  .book--single { width: 45vw; }
+  .poems-page .intro {
+    padding: var(--space-md);
+    width: auto;
+  }
+}
+
+/* -----------------------------------------
+   Background
+----------------------------------------- */
+.poems-page .wrap {
+  background-image: url("../../../assets/img/photos-poems/external/greyfloral.png");
+  background-size: auto;
+  background-position: top left;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  color: var(--color-text-light);
+}
+
+.poems-page .wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.35);
+  z-index: 0;
+}
+
+.poems-page .wrap > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* -----------------------------------------
+   Sidebar
+----------------------------------------- */
+.sidebar-hover {
+  position: absolute;
+  right: calc((100% - 1100px) / 2 - 36px);
+  top: 320px;
+  height: 600px;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.sidebar-hover .sidebar-strip {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 36px;
+  height: 160px;
+  background: var(--color-accent);
+  color: #fff;
+  font-weight: bold;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  text-align: center;
+  border-radius: 6px 0 0 6px;
+  cursor: pointer;
+  pointer-events: auto;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sidebar-hover .sidebar-strip:hover {
+  opacity: 1;
+}
+
+.sidebar-hover .sidebar-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 260px;
+  height: 100%;
+  background: rgba(245,245,245,1);
+  backdrop-filter: blur(2px);
+  box-shadow: -4px 0 14px rgba(0,0,0,0.15);
+  border-left: 1px solid rgba(0,0,0,0.05);
+  transform: translateX(105%);
+  opacity: 0;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+  padding: var(--space-lg);
+  pointer-events: none;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.sidebar-hover.active .sidebar-panel {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Title color (match Recent Posts h3) */
+.sidebar-hover .sidebar-panel h3 {
+  color: var(--color-accent-dark) !important;
+}
+
+.sidebar-hover .poem-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: var(--font-sm);
+  text-align: left;
+}
+
+.sidebar-hover .poem-list li {
+  margin-bottom: 0.4em;
+}
+
+/* Base link color (match Recent Posts) — unified */
+.sidebar-hover .poem-list a {
+  text-decoration: none;
+  color: var(--color-accent);
+  transition: color 0.2s ease, font-weight 0.2s ease;
+}
+
+/* Hover (match Recent Posts hover) — unified */
+.sidebar-hover .poem-list a:hover {
+  color: var(--color-blue-soft);
+  text-decoration: underline;
+}
+
+/* Active state (match Recent Posts selection) — unified */
+.sidebar-hover .poem-list a.active {
+  color: var(--color-blue-soft);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+
+/* -----------------------------------------
+   Copyright
+----------------------------------------- */
+.poems-page .copyright {
+  text-align: left;
+  color: var(--color-accent-dark);
+  font-size: var(--font-base);
+  margin-bottom: 0;
+}
+
+/* -----------------------------------------
+   Final book overrides
+----------------------------------------- */
+.poems-page .book .page--poem,
+.poems-page .book .page--poem pre,
+.poems-page .book .page--poem h3 {
+  color: var(--color-fg) !important;
+}
+
+.poems-page .book .page--poem {
+  background: var(--color-card) !important;
+}
+
+.poems-page .book .closing,
+.poems-page .book .closing p {
+  color: var(--color-fg) !important;
+  background: var(--color-card) !important;
+}

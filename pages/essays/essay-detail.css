@@ -1,0 +1,86 @@
+/* =========================================
+   ESSAY DETAIL PAGE – Content & Sidebar
+   -----------------------------------------
+   Purpose:
+   - Uses the shared .wrap--sidebar geometry
+     from _structure.css
+   - Keeps only local styling: PDF, meta info,
+     header offset, and responsive tweaks
+========================================= */
+
+/* -----------------------------------------
+   Sidebar
+   ----------------------------------------- */
+
+/* Hide search box on detail pages */
+.essay-detail-page .search-box {
+  display: none;
+}
+
+/* Allow sticky sidebar to work by preventing overflow clipping
+   inside the essay detail grid container */
+body.essay-detail-page {
+  overflow: visible;
+}
+
+/* -----------------------------------------
+   PDF viewer
+   ----------------------------------------- */
+.pdf-viewer {
+  width: 100%;
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-md);
+  box-shadow: var(--shadow-light);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+/* -----------------------------------------
+   Essay metadata
+   ----------------------------------------- */
+.essay-meta {
+  margin: var(--space-md);
+  font-size: 0.9rem;
+  color: var(--color-text-muted, #666);
+}
+
+.essay-meta strong {
+  color: var(--color-text-accent, #333);
+  margin-right: 0.4rem;
+}
+
+.essay-meta p {
+  margin: 0.2rem 0;
+  line-height: 1.2;
+}
+
+/* -----------------------------------------
+   Responsive adjustments
+   ----------------------------------------- */
+@media (max-width: 900px) {
+  .wrap--sidebar .wrap-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+    width: 100%;
+    padding-left: 0;
+  }
+}
+
+/* -----------------------------------------
+   Compact the sidebar content spacing
+   ----------------------------------------- */
+body.essay-detail-page .sidebar > *:first-child {
+  margin-top: 0; /* remove unwanted inner margin */
+}
+
+body.essay-detail-page .sidebar {
+  padding-top: 0;          /* ensure no inner padding */
+}
+
+body.essay-detail-page .sidebar h3,
+body.essay-detail-page .sidebar .recent-essays {
+  margin-top: -32px;            /* unify top spacing for first elements */
+}
