@@ -269,7 +269,7 @@
    Background
 ----------------------------------------- */
 .poems-page .wrap {
-  background-image: url("../../../assets/img/photos-poems/external/greyfloral.png");
+  background-image: url("/assets/img/anthology/photos-poems/external/greyfloral.png");
   background-size: auto;
   background-position: top left;
   background-repeat: repeat;

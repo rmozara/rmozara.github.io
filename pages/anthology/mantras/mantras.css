@@ -1,0 +1,209 @@
+/* ============================================================
+   MANTRA & HYMNS PAGE — LAYOUT & TYPOGRAPHY
+   Clean, consolidated, consistent.
+============================================================ */
+
+
+/* ------------------------------------------------------------
+   Local reset — reduce default heading spacing on this page
+------------------------------------------------------------ */
+body.mantras-page h2,
+body.mantras-page h3,
+body.mantras-page h4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+
+/* ------------------------------------------------------------
+   PAGE LAYOUT WRAPPER
+   Centers content column, creates vertical rhythm
+------------------------------------------------------------ */
+.mantras-layout {
+  max-width: 750px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.25rem; /* Vertical gap between all items */
+}
+
+
+/* ------------------------------------------------------------
+   SECTION TITLES (e.g. Vedic, Post-Vedic, Stotra)
+------------------------------------------------------------ */
+.section-title {
+  font-size: var(--font-xl);
+  font-weight: 600;
+  color: var(--color-accent-dark);
+  margin-top: 2.5rem;      /* separation from previous block */
+  margin-bottom: 0.75rem;  /* tight lead-in to first mantra */
+}
+
+/* Sanskrit title directly under section title */
+.section-title-sanskrit {
+  font-family: "Noto Sans Devanagari", serif;
+  font-size: var(--font-xl);
+  margin-top: 0;                   /* tight */
+  margin-bottom: var(--space-md);  /* clean spacing before first mantra */
+  text-align: left;
+}
+
+/* Tighten gap between h2 title and Sanskrit subtitle */
+.section-title + .section-title-sanskrit {
+  margin-top: calc(-1 * var(--space-sm));
+}
+
+
+/* ------------------------------------------------------------
+   MANTRA CARD
+   Uniform container for each mantra block
+------------------------------------------------------------ */
+.mantra-card {
+  background: var(--color-surface);
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  margin: 0;  /* spacing fully controlled by mantras-layout row-gap */
+  line-height: 1.65;
+}
+
+/* Close spacing when two mantra-cards follow */
+.mantra-card + .mantra-card {
+  margin-top: 0.75rem;
+}
+
+/* Mantra title (e.g. "Gāyatrī Mantra") */
+.mantra-card h4 {
+  font-size: var(--font-lg);
+  color: var(--color-accent-dark);
+  margin-bottom: 0.5rem;
+}
+
+
+/* ------------------------------------------------------------
+   SCRIPT BLOCKS (Sanskrit / Gurmukhi / IAST)
+------------------------------------------------------------ */
+.script {
+  font-size: 1.35rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.devanagari {
+  font-family: "Noto Sans Devanagari", serif;
+}
+
+.gurmukhi {
+  font-family: "Noto Sans Gurmukhi", serif;
+}
+
+/* Optional monospaced style for IAST-only blocks */
+.iasts {
+  font-family: var(--font-mono);
+  color: var(--color-muted-dark);
+  margin-bottom: 0.5rem;
+}
+
+
+/* ------------------------------------------------------------
+   IAST BLOCKS (line-by-line textual blocks)
+------------------------------------------------------------ */
+.iasts-block,
+.script-block {
+  margin-bottom: var(--space-sm);
+}
+
+.iasts-block p,
+.script-block p {
+  margin: 0 0 0.35rem 0;
+}
+
+
+/* ------------------------------------------------------------
+   MEANING BLOCK (“Literal translation:”)
+------------------------------------------------------------ */
+.meaning {
+  margin-bottom: 0.75rem;
+}
+
+.meaning p {
+  margin: 0 0 0.35rem 0;
+}
+
+
+/* ------------------------------------------------------------
+   MANTRA-HEAD (two-line header: IAST + Literal)
+------------------------------------------------------------ */
+.mantra-head p {
+  margin-bottom: var(--space-xxs);
+}
+
+.mantra-head .meaning {
+  margin-top: var(--space-xxs);
+  margin-bottom: var(--space-md);
+}
+
+
+/* ------------------------------------------------------------
+   NOTES BLOCK (explanatory bullet list)
+------------------------------------------------------------ */
+.notes {
+  background: var(--color-bg-soft);
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+}
+
+.notes strong {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.notes ul {
+  padding-left: 1.1rem;
+}
+
+
+/* ============================================================
+   EDITORIAL NOTES — clean, subdued informational block
+   Styled like a lightweight card
+============================================================ */
+
+.mantra-card.editorial-notes {
+  font-size: var(--font-sm);
+  line-height: calc((var(--line-normal) + var(--line-relaxed))/2);
+  margin-top: var(--space-lg);
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.mantra-card.editorial-notes h4 {
+  font-size: var(--font-md);
+  color: var(--color-accent-dark);
+  margin-bottom: var(--space-sm);
+}
+
+.mantra-card.editorial-notes p {
+  margin: var(--space-xs) 0;
+}
+
+.intro {
+  max-width: var(--intro-max-width, 620px);
+  margin-left: auto;
+  margin-right: auto;
+  padding: var(--space-xl) var(--space-lg);
+  text-align: left;
+}
+
+.intro h2 {
+  margin-bottom: var(--space-md);
+}
+
+.intro p {
+  margin-top: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+.intro .extra-btn {
+  margin-top: var(--space-sm);
+}

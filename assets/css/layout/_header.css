@@ -121,6 +121,8 @@ body.about-me-page        { --header-bg-offset-y: calc(50% + 162px); }
 body.about-site-page      { --header-bg-offset-y: calc(50% + 162px); }
 body.contact-page         { --header-bg-offset-y: calc(50% + 162px); }
 body.publications-page    { --header-bg-offset-y: calc(50% + 138px); }
+body.anthology-page       { --header-bg-offset-y: calc(50% + 138px); }
+body.mantras-page         { --header-bg-offset-y: calc(50% + 138px); }
 body.photos-poems-page    { --header-bg-offset-y: calc(50% + 138px); }
 body.photos-page          { --header-bg-offset-y: calc(50% + 138px); }
 body.poems-page           { --header-bg-offset-y: calc(50% + 138px); }

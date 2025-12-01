@@ -1,0 +1,39 @@
+/* =========================================
+   Breadcrumb Navigation — Reusable Component
+   -----------------------------------------
+   Purpose:
+   - Provides hierarchical navigation feedback
+     (Anthology › Photos & Poems › Poems)
+   - Used across all Anthology → Photos & Poems pages
+   - Kept visually subtle to avoid overpowering page headers
+========================================= */
+
+/* Container layout */
+.breadcrumb {
+  font-size: var(--font-sm);
+  color: var(--color-muted);
+  margin: var(--space-xxs) 0 var(--space-xxs);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Links inside breadcrumb */
+.breadcrumb a {
+  color: var(--color-accent-dark);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--color-accent);
+}
+
+/* Current (non-clickable) segment */
+.breadcrumb .current {
+  color: var(--color-muted);
+}
+
+/* Separator › between segments */
+.breadcrumb .sep {
+  color: var(--color-muted);
+}

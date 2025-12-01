@@ -1,0 +1,69 @@
+/* Same structure as essays overview */
+
+.anthology-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* same as essays */
+  gap: var(--space-lg);
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .anthology-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.anthology-card {
+  background: var(--color-card);
+  box-shadow: var(--shadow-medium);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  width: 100%;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+body.anthology-page .anthology-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-strong);
+}
+
+.anthology-card-inner {
+  padding: var(--space-md);
+}
+
+.anthology-title {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--font-md);
+  font-weight: var(--link-font-weight);
+}
+
+.anthology-card-inner hr {
+  border: none;
+  border-top: var(--divider);
+  margin: var(--space-sm) 0 var(--space-md);
+}
+
+.anthology-excerpt {
+  color: var(--color-accent-dark);
+  font-size: var(--font-base);
+  line-height: var(--line-normal);
+  margin: 0;
+}
+
+.anthology-card a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Thumbnail images for anthology cards */
+.anthology-thumb {
+  display: block;
+  width: 100%;
+  height: var(--essay-thumb-h); /* identical height as essays */
+  object-fit: cover;
+}
+
+body.anthology-page .sidebar h3,
+body.anthology-page .sidebar .recent-essays {
+  margin-top: -32px;            /* unify top spacing for first elements */
+}

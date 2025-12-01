@@ -3,7 +3,7 @@
 """
 generate_photos_json.py
 -----------------------
-Scans ../../../assets/img/photos-poems/photos/ for image files
+Scans /assets/img/anthology/photos-poems/photos/ for image files
 and writes photos.json here (pages/photos-poems/photos/photos.json).
 
 Run from this directory:
@@ -18,7 +18,7 @@ import pathlib
 script_dir = pathlib.Path(__file__).resolve().parent
 
 # Folder containing the images
-image_dir = (script_dir / "../../../assets/img/photos-poems/photos").resolve()
+image_dir = (script_dir / "/assets/img/anthology/photos-poems/photos").resolve()
 
 # Output file (JSON) in the same folder as this script
 output_path = script_dir / "photos.json"

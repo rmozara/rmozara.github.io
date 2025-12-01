@@ -1,8 +1,56 @@
+// =========================================
+// Breadcrumb Initialisation for Poems Page
+// =========================================
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (!bcSection || !bcCurrent) return;
+
+  // Poems-page configuration
+  bcSection.textContent = "Photos & Poems";
+  bcSection.href = "/pages/anthology/photos-poems/index.html";
+  bcCurrent.textContent = "Poems";
+
+  // Separator visible
+  if (bcSpacer) bcSpacer.style.display = "inline";
+});
+
+// =========================================
+// Poems Page – Sidebar Hover Reveal Logic
+// =========================================
+
+document.addEventListener("DOMContentLoaded", () => {
+  const sidebar = document.querySelector(".sidebar-hover");
+  if (!sidebar) return;
+
+  const strip = sidebar.querySelector(".sidebar-strip");
+  const panel = sidebar.querySelector(".sidebar-panel");
+  let hoverTimer;
+
+  const openSidebar = () => {
+    clearTimeout(hoverTimer);
+    sidebar.classList.add("active");
+  };
+
+  const closeSidebar = () => {
+    hoverTimer = setTimeout(() => {
+      sidebar.classList.remove("active");
+    }, 150);
+  };
+
+  strip.addEventListener("mouseenter", openSidebar);
+  strip.addEventListener("mouseleave", closeSidebar);
+  panel.addEventListener("mouseenter", openSidebar);
+  panel.addEventListener("mouseleave", closeSidebar);
+});
+
+// =========================================
 // poems.js — Plugin-free flipbook (cover → spreads → closing)
+// =========================================
+
 window.addEventListener("DOMContentLoaded", async () => {
   try {
     // --- Load data ---
-    const res = await fetch("/pages/photos-poems/poems/poems.json");
+    const res = await fetch("/pages/anthology/photos-poems/poems/poems.json");
     const data = await res.json();
 
     const book = document.getElementById("book");
@@ -43,18 +91,18 @@ window.addEventListener("DOMContentLoaded", async () => {
     // =========================================================
     function render(dir = 0) { // dir: 1 = next, -1 = prev, 0 = initial
       const s = spreads[idx];
-    
+
       // --- Create new spread ---
       const incoming = document.createElement("div");
       incoming.className = `spread ${s.kind === "double" ? "spread--double" : "spread--single"}`;
-    
+
       // Layout and size
       frame.style.justifyContent = s.kind === "single"
         ? (s.side === "right" ? "flex-end" : "flex-start")
         : "center";
       book.className = `book book--${s.kind}`;
       book.style.width = s.kind === "single" ? "450px" : "900px";
-    
+
       // Fill content
       if (s.kind === "single") {
         // render only the single-side page (right for cover, left for closing)
@@ -69,22 +117,22 @@ window.addEventListener("DOMContentLoaded", async () => {
           <div class="page page--photo">${s.htmlLeft}</div>
           <div class="page page--poem">${s.htmlRight}</div>`;
       }
-    
+
       // Insert new spread, with starting offset
       incoming.style.setProperty('--dx', dir > 0 ? '20px' : (dir < 0 ? '-20px' : '0px'));
       book.appendChild(incoming);
       void incoming.offsetWidth; // force reflow
       incoming.classList.add("active");
-    
+
       // --- Handle previous spread (staggered fade) ---
       const prevSpreads = book.querySelectorAll(".spread");
       if (prevSpreads.length > 1) {
         const outgoing = prevSpreads[0];
         const pages = outgoing.querySelectorAll(".page");
         const [leftPage, rightPage] = pages;
-    
+
         const delay = 0.25; // seconds — visibly slower
-    
+
         // set staggered delays
         if (dir > 0 && rightPage) {
           // turn right → right first, then left
@@ -95,11 +143,11 @@ window.addEventListener("DOMContentLoaded", async () => {
           leftPage.style.transitionDelay = "0s";
           if (rightPage) rightPage.style.transitionDelay = `${delay}s`;
         }
-    
+
         outgoing.classList.add("fading");              // trigger per-page opacity fade
         outgoing.classList.remove("active");           // trigger spread slide/fade
         outgoing.style.setProperty("--dx", dir > 0 ? "-20px" : "20px");
-    
+
         outgoing.addEventListener("transitionend", () => outgoing.remove(), { once: true });
       }
 

@@ -61,7 +61,7 @@
   } else {
     if (depthParts.includes("essays")) current = "essays";
     else if (depthParts.includes("publications")) current = "publications";
-    else if (depthParts.includes("photos-poems")) current = "photos-poems";
+    else if (depthParts.includes("anthology")) current = "anthology";
     else if (depthParts.includes("about-me")) current = "about-me";
     else if (depthParts.includes("contact")) current = "contact";
   }
@@ -126,6 +126,85 @@
 
   } catch (err) {
     console.error("FOOTER FAILED:", err);
+  }
+
+
+  /* ============================================================
+     6b. LOAD ALL OTHER PARTIALS (data-partial)
+     ============================================================ */
+
+  try {
+    const partialHolders = document.querySelectorAll("[data-partial]");
+
+    await Promise.all(
+      Array.from(partialHolders).map(async el => {
+        const file = el.dataset.partial.replace(/^\//, ""); // strip leading slash
+        const response = await fetch(prefix + file);
+        const html = await response.text();
+        el.innerHTML = html;
+      })
+    );
+
+    // Jetzt sind alle Partials im DOM → Breadcrumb initialisieren
+    initBreadcrumb();
+
+  } catch (err) {
+    console.error("PARTIAL FAILED:", err);
+  }
+
+
+  /* ============================================================
+     6c. BREADCRUMB AUTO-CONFIG (only if breadcrumb exists)
+     ============================================================ */
+
+
+  function initBreadcrumb() {
+    const bcCurrent = document.getElementById("breadcrumb-current");
+    const separators = document.querySelectorAll(".breadcrumb .sep");
+
+    if (!bcCurrent) return;
+
+    const dp = location.pathname.split("/").filter(Boolean);
+
+    // PATH-EXAMPLES:
+    // pages/anthology/photos-poems/index.html        → overview page
+    // pages/anthology/photos-poems/poems/index.html  → subpage
+    // pages/anthology/photos-poems/photos/index.html → subpage
+
+    // Detect if we are on the overview page:
+    const isOverview =
+      dp[0] === "pages" &&
+      dp[1] === "anthology" &&
+      dp[2] === "photos-poems" &&
+      dp[3] === "index.html";
+
+  if (isOverview) {
+    // Replace "Photos & Poems" link with plain text (not clickable)
+    const parent = document.getElementById("breadcrumb-parent");
+    const parentSpan = document.createElement("span");
+    parentSpan.textContent = parent.textContent;
+    parentSpan.className = "current";
+
+    parent.replaceWith(parentSpan);
+
+    // No current item shown on overview
+    bcCurrent.textContent = "";
+
+    // Hide the second separator (Anthology › Photos & Poems)
+    separators[1].style.display = "none";
+
+    return;
+  }
+
+    // Normal subpage logic
+    const sectionFolder = dp[dp.length - 2];
+
+    const currentMap = {
+      poems: "Poems",
+      photos: "Photos",
+    };
+
+    bcCurrent.textContent = currentMap[sectionFolder] || sectionFolder || "Current";
   }
 
 

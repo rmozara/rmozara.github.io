@@ -18,7 +18,7 @@
 }
 
 /* Remove browser default top margin on first heading */
-.card h2 {
+.card > h2 {
   margin-top: 0;
 }
 
@@ -40,15 +40,15 @@
 }
 
 /* Heading inside text card */
-.txt-card h2 {
+.txt-card > h2 {
   font-size: var(--font-baseplus); /* Fixed pixel size for zoom stability */
   margin-bottom: 1.5em;
   color: var(--color-fg);
 }
 
 /* Title alignment (shared between card + txt-card) */
-.card h2,
-.txt-card h2 {
+.card > h2,
+.txt-card > h2 {
   letter-spacing: calc(var(--letter-space) * 0.5);
   color: var(--color-fg);
   font-weight: var(--link-font-weight);

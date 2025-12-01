@@ -7,7 +7,7 @@
 
   <!-- ========== STYLES ========== -->
   <link rel="stylesheet" href="/assets/css/style.css">
-  <link rel="stylesheet" href="/pages/photos-poems/poems/poems.css">
+  <link rel="stylesheet" href="/pages/anthology/photos-poems/poems/poems.css">
 
   <!-- ========== PREFETCH ========== -->
   <link rel="prefetch" href="/partials/header-simple.html">
@@ -21,6 +21,9 @@
   ========================================= -->
   <div class="wrap">
     <div class="wrap-inner">
+
+      <!-- BREADCRUMB -->
+      <div data-partial="/partials/breadcrumb.html"></div>
 
       <section class="poems-layout">
 
@@ -66,40 +69,11 @@
   </div>
 
   <!-- =========================================
-       LIGHTBOOK / HOVER LOGIC
-  ========================================= -->
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const sidebar = document.querySelector(".sidebar-hover");
-    if (!sidebar) return;
-    const strip = sidebar.querySelector(".sidebar-strip");
-    const panel = sidebar.querySelector(".sidebar-panel");
-    let hoverTimer;
-
-    const openSidebar = () => {
-      clearTimeout(hoverTimer);
-      sidebar.classList.add("active");
-    };
-
-    const closeSidebar = () => {
-      hoverTimer = setTimeout(() => {
-        sidebar.classList.remove("active");
-      }, 150);
-    };
-
-    strip.addEventListener("mouseenter", openSidebar);
-    strip.addEventListener("mouseleave", closeSidebar);
-    panel.addEventListener("mouseenter", openSidebar);
-    panel.addEventListener("mouseleave", closeSidebar);
-  });
-  </script>
-
-  <!-- =========================================
        SCRIPTS – Passive UI logic
   ========================================= -->
   <script defer src="/assets/js/loadPartials.js"></script>
   <script defer src="https://unpkg.com/lucide@0.422.0/dist/umd/lucide.js"></script>
   <script defer src="/assets/js/main.js"></script>
-  <script defer src="/pages/photos-poems/poems/poems.js"></script>
+  <script defer src="/pages/anthology/photos-poems/poems/poems.js"></script>
 </body>
 </html>
