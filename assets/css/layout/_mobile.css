@@ -1,0 +1,378 @@
+/* =========================================
+   Mobile Overrides (<= 700px)
+   =========================================
+   Purpose:
+   - Collects all mobile-specific fixes in one place.
+   - Keeps desktop rules stable and untouched.
+   - Avoids scattered media queries across many files.
+========================================= */
+
+@media (max-width: 700px) {
+
+  /* -----------------------------------------
+     Global Mobile Safety
+     -----------------------------------------
+     Purpose:
+     - Prevent accidental horizontal scrolling on small viewports.
+  ----------------------------------------- */
+  /* =========================================
+     Navigation – Mobile Layout & Burger Menu
+     =========================================
+     Purpose:
+     - Brand left, burger right.
+     - Hide desktop links by default.
+     - Open state: fixed panel below the top bar.
+     - Ensure readable colors on hero vs open panel.
+  ========================================= */
+
+  /* -----------------------------------------
+     a) Top bar layout: brand left, burger right
+  ----------------------------------------- */
+  .nav .bar {
+    justify-content: space-between;
+    padding: 0 var(--space-md);
+  }
+
+  .nav-toggle { display: inline-block; }
+
+  /* -----------------------------------------
+     b) Mobile default state: hero visible
+     -----------------------------------------
+     Notes:
+     - Override desktop scroll-state explicitly.
+     - Keeps nav transparent on top of the header image.
+  ----------------------------------------- */
+  body:not(.nav-open) .nav,
+  body.scrolled:not(.nav-open) .nav {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-bottom: 0 !important;
+  }
+
+  body:not(.nav-open) .nav .brand-name,
+  body:not(.nav-open) .nav-toggle {
+    color: var(--color-text-light) !important;
+  }
+
+  /* -----------------------------------------
+     b2) Mobile scrolled state: show white strip
+  ----------------------------------------- */
+  body.scrolled:not(.nav-open) .nav {
+    background: var(--color-bg) !important;
+    box-shadow:
+      0 2px 6px rgba(var(--color-fg-rgb), 0.08),
+      0 0 0 1px rgba(var(--color-fg-rgb), 0.05);
+    border-bottom: 1px solid rgba(var(--color-fg-rgb), 0.1);
+  }
+
+  body.scrolled:not(.nav-open) .nav .brand-name {
+    color: var(--color-fg) !important;
+  }
+
+  body.scrolled:not(.nav-open) .nav-toggle {
+    color: var(--color-accent-dark) !important;
+  }
+
+  .nav .brand,
+  body.nav-open .nav .brand {
+    transform: none !important;
+  }
+
+  .nav .brand-name,
+  body.nav-open .nav .brand-name {
+    font-size: 1rem !important;
+    line-height: 1.2 !important;
+  }
+
+  /* -----------------------------------------
+     c) Links: hidden by default on mobile
+  ----------------------------------------- */
+  .nav .links { display: none; }
+
+  /* -----------------------------------------
+     d) Menu open state: solid top bar + panel
+  ----------------------------------------- */
+  body.nav-open .nav {
+    background: var(--color-bg) !important;
+    box-shadow:
+      0 2px 6px rgba(var(--color-fg-rgb), 0.08),
+      0 0 0 1px rgba(var(--color-fg-rgb), 0.05);
+    border-bottom: 1px solid rgba(var(--color-fg-rgb), 0.1);
+  }
+
+  body.nav-open .nav .brand-name { color: var(--color-fg) !important; }
+  body.nav-open .nav-toggle { color: var(--color-accent-dark) !important; }
+
+  body.nav-open .nav .links {
+    display: flex;
+    position: fixed;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    z-index: var(--z-nav);
+    background: var(--color-bg);
+    border-bottom: 1px solid rgba(var(--color-fg-rgb), 0.1);
+    box-shadow: 0 6px 20px rgba(var(--color-fg-rgb), 0.10);
+
+    flex-direction: column;
+    gap: 0;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  body.nav-open .nav .links a {
+    line-height: 1.2;
+    padding: 0.6rem 0;
+    font-size: 1rem;
+    color: var(--color-accent-dark);
+    width: 100%;
+    text-align: left;
+  }
+
+  body.nav-open .nav a:hover,
+  body.nav-open .nav a.active {
+    color: var(--color-blue-soft);
+  }
+
+
+  /* =========================================
+     Header – Mobile Stacking Context Fix
+     =========================================
+     Purpose:
+     - Ensure the header overlay stays behind actual content on mobile.
+     - Prevent feature strip and hero content from being dimmed by ::after.
+  ========================================= */
+
+  .header { isolation: isolate; }
+
+  .header::after { z-index: var(--z-header-overlay); }
+
+  .header .hero {
+    position: relative;
+    z-index: var(--z-header-content);
+  }
+
+
+  /* =========================================
+     Header (Home) – Mobile: end header at feature strip
+     =========================================
+     Purpose:
+     - Do NOT keep the header artificially tall on mobile.
+     - Let header height be determined by content (hero + buttons + feature strip).
+     - Use --header-bg-offset-y ONLY to control which part of the image is visible.
+  ========================================= */
+
+  .header--home {
+    /* Control visible image region (this is the correct token for background-position) */
+    --header-bg-offset-y: 46%;
+
+    /* Critical: remove artificial height / tail */
+    min-height: auto !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Slightly tighten hero vertical rhythm on mobile */
+  .header--home .hero {
+    margin: var(--space-md) auto 0;
+    position: relative;
+    z-index: var(--z-header-content);
+  }
+
+  .header--home h1 { line-height: 1.15; }
+
+  /* Give the buttons breathing room above the feature strip */
+  .header--home .hero .cta-row,
+  .header--home .hero .buttons,
+  .header--home .hero .cta {
+    margin-bottom: var(--space-md);
+  }
+
+  /* Give the buttons breathing room above the feature strip */
+  .header--home .hero .cta-row,
+  .header--home .hero .buttons,
+  .header--home .hero .cta {
+    margin-bottom: 0; /* wir steuern den Abstand unten über feature-wrap */
+  }
+
+  /* Abstand zwischen Buttons und Feature Strip (sauber & stabil) */
+  .header--home .feature-wrap {
+    margin-top: var(--space-md); /* ggf. var(--space-lg) wenn du mehr willst */
+  }
+
+  /* Maskiert das Header-Hintergrundbild an der Unterkante (gegen Corner-Bleed) */
+  .header--home { position: relative; }
+
+  .header--home::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: calc(var(--radius-strip, 14px) + 2px);
+    background: var(--color-bg);
+    z-index: var(--z-header-overlay);
+    pointer-events: none;
+  }
+
+  /* Feature bleibt darüber */
+  .header--home .feature-wrap,
+  .header--home .feature-strip {
+    position: relative;
+    z-index: var(--z-feature);
+  }
+
+  /* =========================================
+     Header – Subpages Mobile Fixes
+     =========================================
+     Purpose:
+     - Prevent grey band caused by pixel-offset cropping on small screens.
+     - Keep subpage header compact.
+     - Keep desktop offsets intact (only neutralize them for mobile).
+  ========================================= */
+
+  .header--simple {
+    min-height: 210px;
+    padding-top: calc(var(--nav-h) + var(--space-lg));
+    padding-bottom: var(--space-sm);
+    background-position: center center !important;
+  }
+
+  .header--simple .hero { margin: var(--space-sm) auto 0; }
+  .header--simple h1 { line-height: 1.15; }
+
+  body.about-me-page,
+  body.about-site-page,
+  body.contact-page,
+  body.publications-page,
+  body.anthology-page,
+  body.mantras-page,
+  body.photos-poems-page,
+  body.photos-page,
+  body.poems-page,
+  body.essays-page,
+  body.symbol-page,
+  body.essay-detail-page,
+  body.impressum-page {
+    --header-bg-offset-y: 50%;
+  }
+
+
+  /* =========================================
+     Feature Strip – Mobile Layout (2×2) IN FLOW
+     =========================================
+     Purpose:
+     - Convert 4 horizontal segments into a compact 2×2 layout on mobile.
+     - Keep it in normal document flow (no absolute overlap).
+     - Keep it above the overlay.
+  ========================================= */
+
+  .feature-wrap {
+    position: static !important; /* keep in flow on mobile */
+    pointer-events: auto;
+  }
+
+  .feature-strip {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: var(--z-feature);   /* above overlay */
+  }
+
+  .feature-strip .seg {
+    width: 50%;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-sm);
+  }
+
+  /* Dividers for wrapped layout */
+  .feature-strip .seg + .seg { border-left: 0; }
+
+  .feature-strip .seg:nth-child(2n) {
+    border-left: var(--divider, 1px solid var(--color-border));
+  }
+
+  .feature-strip .seg:nth-child(n + 3) {
+    border-top: var(--divider, 1px solid var(--color-border));
+  }
+
+  .feature-strip .seg span { font-size: var(--font-sm); }
+
+  .feature-strip .seg svg {
+    width: var(--space-md) !important;
+    height: var(--space-md) !important;
+  }
+
+
+  /* =========================================
+     Home Intro – Mobile Stack (Image → Text)
+     =========================================
+     Purpose:
+     - Stack the two homepage cards vertically on mobile.
+     - Ensure cards fit the phone width.
+     - Order: image first, text second (CSS-only).
+     - Remove desktop overlap offsets.
+     - Reduce excess whitespace below the section.
+  ========================================= */
+
+  .homepage .wrap--2col {
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+    padding-bottom: var(--space-md) !important;
+  }
+
+  .homepage .wrap--2col .wrap-inner {
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* Order columns: image first, text second */
+  .homepage .wrap--2col .wrap-inner > .col:nth-child(1) { order: 2; }
+  .homepage .wrap--2col .wrap-inner > .col:nth-child(2) { order: 1; }
+
+  .homepage .wrap--2col .col { width: 100%; }
+
+  .homepage .wrap--2col .txt-card,
+  .homepage .wrap--2col .img-card {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 !important;
+    transform: none !important;
+
+    /* Neutralize inline offset variables used on desktop */
+    --tx: 0px;
+    --ty: 0px;
+    --bx: 0px;
+    --by: 0px;
+  }
+
+  .homepage .wrap--2col .img-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Text card readability */
+  .homepage .wrap--2col .txt-card {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .homepage .wrap--2col .txt-card h2 { line-height: 1.2; }
+  .homepage .wrap--2col .txt-card p  { line-height: 1.55; }
+
+  /* Reduce extra section tail space */
+  .homepage .wrap--2col .col:last-child { margin-bottom: 0 !important; }
+
+  .homepage .wrap--2col .txt-card:last-child,
+  .homepage .wrap--2col .img-card:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  .nav .bar {
+    max-width: none;
+    width: 100%;
+    margin: 0;
+  }
+
+}

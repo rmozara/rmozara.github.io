@@ -217,20 +217,4 @@
 
   document.dispatchEvent(new Event("headerLoaded"));
 
-
-  /* ============================================================
-     8. SIDEBAR FIX
-     ============================================================ */
-
-  document.addEventListener("headerLoaded", () => {
-    const sidebar = document.querySelector(".sidebar");
-    if (sidebar) {
-      requestAnimationFrame(() => {
-        sidebar.style.position = "relative";
-        void sidebar.offsetHeight;
-        sidebar.style.position = "";
-      });
-    }
-  });
-
 })();

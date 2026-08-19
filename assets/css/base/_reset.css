@@ -25,8 +25,6 @@ html {
 html, body {
   margin: 0;
   padding: 0;
-  background: var(--color-bg); /* Unified background for consistent theme base */
-  color: var(--color-fg);      /* Base text color for all pages */
   -webkit-text-size-adjust: 100%; /* Prevent font scaling on iOS */
   text-size-adjust: 100%;         /* Ensure consistent scaling across browsers */
 }

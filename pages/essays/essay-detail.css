@@ -84,3 +84,11 @@ body.essay-detail-page .sidebar h3,
 body.essay-detail-page .sidebar .recent-essays {
   margin-top: -32px;            /* unify top spacing for first elements */
 }
+
+@media (max-width: 900px) {
+  body.essay-detail-page .sidebar h3,
+  body.essay-detail-page .sidebar .recent-essays {
+    margin-top: 0;
+  }
+}
+

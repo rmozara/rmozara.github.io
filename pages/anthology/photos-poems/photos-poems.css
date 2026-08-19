@@ -132,3 +132,14 @@
   font-size: var(--font-base);
   margin-bottom: 0;
 }
+
+@media (max-width: 700px) {
+  .photos-poems-page .wrap-inner {
+    gap: var(--space-md);
+  }
+
+  .photos-poems-page .intro {
+    margin-bottom: var(--space-md);
+  }
+}
+

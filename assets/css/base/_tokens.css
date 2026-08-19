@@ -49,6 +49,13 @@
   --z-feature: 15;             /* Feature strip overlapping header */
   --z-nav: 20;                 /* Navigation bar (highest fixed layer) */
 
+  --z-sidebar: calc(var(--z-wrap) + 1); /* above wrap content, below feature/nav */
+  --z-card-base: 2;            /* matches current cards usage */
+  --z-card-overlap: 3;         /* matches current cards overlap usage */
+
+  --z-header-overlay: 0;
+  --z-header-content: 1;
+
   /* =========================================
      Layout Dimensions
      -----------------------------------------
@@ -244,9 +251,15 @@
   --lightbox-btn-offset: 56px;    /* Horizontal offset pushing prev/next & close outside card */
 
   /* =========================================
-     HEADER TOKENS — Background & Hero Offsets
+     Header — Background & Hero Offsets
      ========================================= */
 
-  --header-bg-offset-y: 50%;   /* Default: Home page */
+  --header-bg-offset-y: 50%;   /* Original desktop Home position */
+
+  /* =========================================
+     Card geometry (desktop defaults)
+     ========================================= */
+  --card-w-txt: 640px;         /* width of .txt-card on desktop */
+  --card-w-img: 600px;          /* width of .img-card on desktop */
 
 }

@@ -15,7 +15,6 @@
 ----------------------------------------- */
 
 .footer {
-  position: fixed;                   /* Docked to viewport bottom */
   bottom: 0;
   left: 0;
   right: 0;
@@ -25,7 +24,6 @@
   height: var(--footer-h);           /* Controlled by root variable */
   background: var(--color-bg);       /* Same as wrap background → seamless transition */
   color: var(--color-accent-dark);   /* Subtle blue tone for refined appearance */
-  z-index: var(--z-footer);          /* Below wrap, above page background */
 }
 
 /* -----------------------------------------
@@ -61,16 +59,6 @@
    - Ensures the footer appears naturally at scroll end.
    - Adds invisible space equal to footer height to prevent content overlap.
 ----------------------------------------- */
-
-html, body {
-  height: auto;                      /* Allow full scroll height */
-  min-height: 100%;                  /* Prevent premature cutoff */
-  overflow-y: auto;                  /* Natural scroll behavior */
-}
-
-body {
-  position: relative !important;     /* Ensures stacking context for wrap and footer */
-}
 
 /* Spacer element: keeps footer from overlapping last content */
 body::after {

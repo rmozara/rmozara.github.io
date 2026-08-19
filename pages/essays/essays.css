@@ -14,8 +14,9 @@
   width: 100%;
 }
 
-/* Stack cards vertically on narrow screens */
-@media (max-width: 900px) {
+/* With the sidebar still visible beside the content, one generous card
+   column is more readable than two cramped cards. */
+@media (max-width: 1260px) {
   .essays-grid {
     grid-template-columns: 1fr;
   }
@@ -28,14 +29,6 @@
 /* Small left padding for sidebar */
 .wrap--sidebar .sidebar {
   padding-left: var(--space-sm);
-}
-
-/* Sidebar sticky behavior (same as detail page) */
-body.essays-page .sidebar {
-  position: sticky !important;
-  top: calc(var(--nav-h) + var(--space-xs)) !important;
-  margin-top: 0 !important;
-  z-index: 3;
 }
 
 /* -----------------------------------------
@@ -53,4 +46,14 @@ body.essays-page .wrap-inner {
 
 body.essays-page .wrap-inner {
   align-items: start !important;
+}
+
+/* Once the sidebar is stacked, keep overview cards at a readable visual width
+   instead of stretching thumbnails across the full content band. */
+@media (max-width: 900px) {
+  .essays-grid .essay-card {
+    width: 100%;
+    max-width: 640px;
+    justify-self: center;
+  }
 }

@@ -43,8 +43,16 @@
     "title": "The Symbol",
     "subtitle": "Its geometry and meaning"
   },
+  "impressum": {
+    "title": "Impressum / Legal Notice",
+    "subtitle": ""
+  },
   "lorentz-transformations": {
     "title": "Local Lorentz Transformations and Curvature",
     "subtitle": ""
+  },
+  "lehrer-suite": {
+    "title": "Lehrer-Suite",
+    "subtitle": "Tools and materials for teaching"
   }
 }

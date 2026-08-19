@@ -12,11 +12,11 @@ The design follows a **quiet, stable rhythm** — minimal distractions, generous
 
 ## Credits
 
-- Symbol and logo by [Roberto Mozara](https://rmozara.github.io/symbol)
+- Symbol and logo by [Roberto Mozara](https://rmozara.github.io/pages/symbol/index.html)
 - Typeface: system-UI stack
 - Icons from [Lucide](https://lucide.dev)
 - Hosted on [GitHub Pages](https://pages.github.com)
 
 ## Contact
 
-For questions or collaborations, please visit the [contact page](https://rmozara.github.io/symbol).
+For questions or collaborations, please visit the [contact page](https://rmozara.github.io/pages/contact/index.html).

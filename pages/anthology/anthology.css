@@ -2,12 +2,12 @@
 
 .anthology-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* same as essays */
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-lg);
   width: 100%;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1260px) {
   .anthology-grid {
     grid-template-columns: 1fr;
   }
@@ -66,4 +66,22 @@ body.anthology-page .anthology-card:hover {
 body.anthology-page .sidebar h3,
 body.anthology-page .sidebar .recent-essays {
   margin-top: -32px;            /* unify top spacing for first elements */
+}
+
+@media (max-width: 900px) {
+  body.anthology-page .sidebar h3,
+  body.anthology-page .sidebar .recent-essays {
+    margin-top: 0;
+  }
+}
+
+
+/* In the stacked layout, retain card proportions comparable to the
+   Photos & Poems presentation rather than stretching thumbnails edge-to-edge. */
+@media (max-width: 900px) {
+  .anthology-grid .anthology-card {
+    width: 100%;
+    max-width: 640px;
+    justify-self: center;
+  }
 }

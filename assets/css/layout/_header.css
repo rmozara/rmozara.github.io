@@ -12,13 +12,12 @@
 ----------------------------------------- */
 .header {
   /* Hero background image */
-  background: url('../../../assets/img/global/header.jpg') center/cover no-repeat;
+  background: url('/assets/img/global/header.jpg') center/cover no-repeat;
 
   /* Color / padding / stacking */
   color: var(--color-text-light);
   padding-top: var(--nav-h);      /* Keeps header clear below nav bar */
-  position: relative;             /* Enables ::after overlay */
-  z-index: var(--z-header);       /* ensures header stays below nav */
+  background-position: center var(--header-bg-offset-y, 50%);
 }
 
 /* Dark overlay layer for text readability */
@@ -28,7 +27,6 @@
   inset: 0;                        /* shorthand for top/right/bottom/left = 0 */
   background: var(--overlay-dark);
   pointer-events: none;            /* Prevent overlay from blocking clicks */
-  z-index: var(--z-header);        /* keep overlay tied to header layer (below nav) */
 }
 
 /* -----------------------------------------
@@ -39,8 +37,6 @@
    - Provides stable margin regardless of zoom or window width.
 ----------------------------------------- */
 .header .hero {
-  position: relative;
-  z-index: calc(var(--z-header) + 1);
   text-align: center;
   max-width: var(--layout-w);
   margin: var(--space-lg) auto 0;
@@ -130,7 +126,3 @@ body.essays-page          { --header-bg-offset-y: calc(50% + 138px); }
 body.symbol-page          { --header-bg-offset-y: calc(50% + 138px); }
 body.essay-detail-page    { --header-bg-offset-y: calc(50% + 162px); }
 body.impressum-page       { --header-bg-offset-y: calc(50% + 189px); }
-
-.header--simple {
-  background-position: center var(--header-bg-offset-y);
-}

@@ -7,7 +7,10 @@
    - .col → inner content column; hosts section grids (.grid-cards, etc.)
    ========================================= */
 
-/* === Fade-in for partials === */
+
+/* -----------------------------------------
+   1) Fade-in for partials
+----------------------------------------- */
 html.preload body {
   opacity: 0;
   transition: none;
@@ -17,12 +20,11 @@ html.ready body {
   transition: opacity 0.25s ease;
 }
 
+
 /* -----------------------------------------
    a) Outer wrapper – full-width paper band
 ----------------------------------------- */
 .wrap {
-  position: relative;                /* z-index isolation for layers */
-  z-index: var(--z-wrap);
   width: 100%;                       /* spans entire viewport */
   background: var(--color-bg);       /* matches footer for reveal */
   box-shadow: var(--shadow-strong);  /* visible page depth band */
@@ -34,9 +36,8 @@ html.ready body {
   content: "";
   display: block;
   height: var(--space-xl);           /* fixed distance before footer */
-  position: relative;
-  z-index: var(--z-wrap);            /* 10 → below feature(15) and nav(20) */
 }
+
 
 /* -----------------------------------------
    b) Inner container – page grid
@@ -51,6 +52,7 @@ html.ready body {
   align-items: start;
   overflow: visible;
 }
+
 
 /* -----------------------------------------
    c) Sidebar variant (right column)
@@ -76,12 +78,14 @@ html.ready body {
   max-width: none;
 }
 
+
 /* -----------------------------------------
    d) Optional symmetrical variant (two equal columns)
 ----------------------------------------- */
 .wrap--2col .wrap-inner {
   grid-template-columns: 1fr 1fr;
 }
+
 
 /* -----------------------------------------
    e) Column container
@@ -96,6 +100,7 @@ html.ready body {
   max-width: 70ch;
 }
 
+
 /* -----------------------------------------
    f) Homepage – Extra Bottom Padding + Background
 ----------------------------------------- */
@@ -105,3 +110,87 @@ html.ready body {
   /* optional subtle paper effect */
   filter: brightness(0.99) contrast(1.02);
 }
+
+
+/* -----------------------------------------
+   g) Mobile/Tablet layout fixes
+   -----------------------------------------
+   Notes:
+   - Navigation is handled in _nav.css (mobile override).
+----------------------------------------- */
+/* Preserve the original desktop/tablet spacing. */
+@media (max-width: 1000px) {
+  .wrap-inner {
+    padding: var(--space-lg) var(--space-md);
+  }
+}
+
+/* Sidebar intermediate layout: keep the sidebar beside the content while
+   allowing the main column to shrink fluidly. Collapse only at phone/tablet
+   widths where two columns no longer remain comfortable. */
+@media (min-width: 901px) and (max-width: 1260px) {
+  .wrap--sidebar .wrap-inner {
+    grid-template-columns: minmax(0, 1fr) var(--sidebar-w);
+    gap: var(--space-md);
+    padding-inline: var(--space-md);
+  }
+}
+
+@media (max-width: 900px) {
+  .wrap--sidebar .wrap-inner {
+    grid-template-columns: 1fr;
+    padding-inline: var(--space-md);
+    gap: var(--space-ml);
+  }
+
+  /* In the stacked layout, navigation/filter sidebars belong before content. */
+  .wrap--sidebar .sidebar {
+    order: -1;
+  }
+}
+
+/* Homepage: preserve the wide composition, then stack before either card
+   becomes cramped. The image-first order is intentionally homepage-only. */
+@media (max-width: 1100px) {
+  .homepage .wrap--2col {
+    padding-inline: var(--space-md);
+  }
+
+  .homepage .wrap--2col .wrap-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .homepage .wrap--2col .wrap-inner > .col:first-child { order: 2; }
+  .homepage .wrap--2col .wrap-inner > .col:nth-child(2) { order: 1; }
+
+  .homepage .wrap--2col .txt-card,
+  .homepage .wrap--2col .img-card {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    transform: none;
+    --tx: 0px;
+    --ty: 0px;
+    --bx: 0px;
+    --by: 0px;
+  }
+}
+
+/* Between the desktop composition and the <=700px in-flow mobile header,
+   the feature strip remains absolutely positioned 120px below the header.
+   Reserve that space explicitly so it cannot cover the first stacked card. */
+@media (min-width: 701px) and (max-width: 1100px) {
+  .homepage .wrap--2col .wrap-inner {
+    gap: var(--space-ml);
+    padding-top: calc(-1 * var(--feature-overlap-default) + var(--space-ml));
+    padding-bottom: 0;
+  }
+
+  /* The stacked section is taller already; avoid retaining the large
+     desktop-only tail before the fixed footer. */
+  .homepage .wrap {
+    padding-bottom: var(--space-md);
+  }
+}
+

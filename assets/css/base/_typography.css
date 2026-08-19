@@ -12,6 +12,7 @@
 ----------------------------------------- */
 html, body {
   color: var(--color-fg); /* Global foreground color for readability */
+  background: var(--color-bg); /* Unified background for consistent theme base */
   font:
     var(--font-base) / var(--line-normal) /* Base font size and line-height */
     system-ui, -apple-system, "Segoe UI", /* Modern default system stack */

@@ -28,9 +28,9 @@
 /* Used primarily on homepage hero / editorial sections */
 .txt-card {
   position: relative; /* Enables transform positioning */
-  width: 640px; /* Fixed editorial panel width (magazine layout) */
+  width: 640px; /* Original desktop editorial panel width */
   transform: translate(var(--tx, 0px), var(--ty, 0px)); /* Optional manual offset */
-  z-index: 2; /* Stacks above background, below overlapping visuals */
+  z-index: var(--z-card-base); /* Stacks above background, below overlapping visuals */
   padding: var(--space-xl) calc(2 * var(--space-xl) + var(--space-xs));
     /* Controlled inner spacing for balanced reading area */
   color: var(--color-accent);
@@ -65,13 +65,13 @@
 ----------------------------------------- */
 .img-card {
   position: relative;
-  width: 600px; /* Slightly smaller for hierarchy balance */
+  width: 600px; /* Original desktop image width */
   transform: translate(var(--bx, 0px), var(--by, 0px));
   border-radius: var(--radius-strip);
   overflow: hidden; /* Clip image corners cleanly */
   background: var(--color-card);
   box-shadow: var(--shadow-medium);
-  z-index: 3; /* May layer above .txt-card for overlap compositions */
+  z-index: var(--z-card-overlap); /* May layer above .txt-card for overlap compositions */
 }
 
 /* Responsive image inside .img-card */

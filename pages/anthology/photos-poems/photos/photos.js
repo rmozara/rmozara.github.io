@@ -1,19 +1,3 @@
-// =========================================
-// Breadcrumb Initialisation for Photos Page
-// =========================================
-
-document.addEventListener("DOMContentLoaded", () => {
-  if (!bcSection || !bcCurrent) return;
-
-  // Poems-page configuration
-  bcSection.textContent = "Photos & Poems";
-  bcSection.href = "/pages/anthology/photos-poems/index.html";
-  bcCurrent.textContent = "Photos";
-
-  // Separator visible
-  if (bcSpacer) bcSpacer.style.display = "inline";
-});
-
 document.addEventListener("DOMContentLoaded", async () => {
   const grid = document.querySelector(".photo-grid");
   if (!grid) return;
@@ -28,6 +12,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       const img = document.createElement("img");
       img.src = `/assets/img/anthology/photos-poems/photos/${encodeURIComponent(name)}`;
       img.alt = "Photo by Alma";
+      img.loading = "lazy";
+      img.decoding = "async";
       fig.appendChild(img);
       grid.appendChild(fig);
     });

@@ -11,24 +11,18 @@
 //  - Fully passive event listeners for performance.
 // =========================================
 
-// --- Auto-update footer year ---
-(() => {
-  const yearEl = document.getElementById('y');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-})();
-
 // --- Scroll-triggered nav transition (robust with partials + images) ---
 (() => {
   const initNavScroll = () => {
-    console.log("initNavScroll() triggered");
+    if (initNavScroll.initialized) return;
 
     const header = document.querySelector(".header");
     const nav = document.querySelector(".nav");
     if (!header || !nav) {
-      console.warn("Header or nav not found yet. Retrying...");
-      setTimeout(initNavScroll, 100);
       return;
     }
+
+    initNavScroll.initialized = true;
 
     const getTriggerPoint = () => header.offsetHeight * 0.05;
 
@@ -46,11 +40,9 @@
 
     // Run once after everything is loaded
     updateNav();
-    console.log("scroll listener attached");
   };
 
   // Works for both direct load and injected header
-  window.addEventListener("load", initNavScroll);
   document.addEventListener("headerLoaded", initNavScroll);
 
   document.addEventListener("headerLoaded", () => {
@@ -64,5 +56,39 @@
 (() => {
   document.addEventListener("DOMContentLoaded", () => {
     if (window.lucide) lucide.createIcons();
+  });
+})();
+
+// --- Mobile burger toggle (delegated; works with injected headers) ---
+(() => {
+  const toggleMenu = (force) => {
+    const open = (force !== undefined)
+      ? force
+      : !document.body.classList.contains("nav-open");
+
+    document.body.classList.toggle("nav-open", open);
+
+    // update aria-expanded on ALL toggles (safe even if multiple headers exist)
+    document.querySelectorAll(".nav-toggle").forEach(btn => {
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  };
+
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".nav-toggle");
+    if (btn) {
+      e.preventDefault();
+      toggleMenu();
+      return;
+    }
+
+    // close when a nav link is clicked
+    const link = e.target.closest(".nav .links a");
+    if (link) toggleMenu(false);
+  });
+
+  // optional: close on Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") toggleMenu(false);
   });
 })();

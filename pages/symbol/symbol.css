@@ -67,16 +67,18 @@
 /* -----------------------------------------
    Mobile Layout
 ----------------------------------------- */
-@media (max-width: 900px) {
+@media (max-width: 1050px) {
   .symbol-page .wrap-inner {
     grid-template-columns: 1fr;
   }
+  .symbol-page .img-card {
+    width: min(340px, 100%);
+  }
+  .symbol-page .txt-card {
+    width: min(580px, 100%);
+  }
   .symbol-page .img-card,
   .symbol-page .txt-card {
-    width: 100%;
-  }
-  .symbol-page .img-card-inner,
-  .symbol-page .txt-card-inner {
     transform: none;
   }
 }

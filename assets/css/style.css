@@ -19,9 +19,13 @@
 @import url('/assets/css/layout/_feature.css');
 @import url('/assets/css/layout/_pdf.css');
 @import url('/assets/css/layout/_footer.css');
+@import url('/assets/css/layout/_stacking.css');
 
 /* === 3. Reusable components === */
 @import url('/assets/css/components/_cards.css');
 @import url('/assets/css/components/_buttons.css');
 @import url('/assets/css/components/_scrollbars.css');
 @import url('/assets/css/components/_breadcrumb.css');
+
+/* === 4. Mobile overrides === */
+@import url('/assets/css/layout/_mobile.css');

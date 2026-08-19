@@ -23,10 +23,8 @@
   background: var(--color-bg);
   padding: var(--space-md);
   border-radius: var(--radius-card);
-  box-shadow: var(--shadow-light);
   box-sizing: border-box;
-  z-index: 3;
-  transition: box-shadow var(--transition-base);
+  z-index: var(--z-sidebar);
 }
 
 /* -----------------------------------------
@@ -49,7 +47,7 @@
 .sidebar .recent-posts,
 #essaySidebar .recent-posts {
   width: 100%;
-  max-width: calc(var(sidebar-w) - 20px);
+  max-width: calc(var(--sidebar-w) - 20px);
   margin-top: var(--space-md);
 }
 
@@ -99,8 +97,27 @@ body.essays-page .wrap-inner {
 /* Fine-tune vertical alignment after navigation reload */
 body.essays-page .sidebar {
   margin-top: calc(-1 * var(--space-sm));
+  top: calc(var(--nav-h) + var(--space-xs)); /* same as essay-detail */
 }
 
-body.essays-page .sidebar {
-  top: calc(var(--nav-h) + var(--space-xs)); /* same as essay-detail */
+/* Stacked sidebar layout: it becomes an ordinary full-width block above
+   the main content rather than remaining sticky. */
+@media (max-width: 900px) {
+  .wrap--sidebar .sidebar,
+  .wrap--sidebar #essaySidebar,
+  .wrap--sidebar #anthologySidebar {
+    position: static !important;
+    top: auto !important;
+    width: 100%;
+    max-width: none;
+    flex-basis: auto;
+    margin: 0;
+    padding: var(--space-md);
+  }
+
+  .wrap--sidebar .sidebar .recent-posts,
+  .wrap--sidebar #essaySidebar .recent-posts,
+  .wrap--sidebar #anthologySidebar .recent-posts {
+    max-width: none;
+  }
 }

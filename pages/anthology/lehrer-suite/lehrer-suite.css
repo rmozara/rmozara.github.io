@@ -1,0 +1,112 @@
+/* Lehrer-Suite project page — uses the existing site-wide card and button system. */
+
+.lehrer-suite-layout {
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.lehrer-suite-layout .card {
+  margin: 0;
+}
+
+.suite-intro p,
+.suite-overview p,
+.suite-german p,
+.suite-components p {
+  color: var(--color-accent-dark);
+  line-height: var(--line-normal);
+}
+
+.suite-intro p:last-of-type {
+  margin-bottom: 0;
+}
+
+.suite-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.suite-download {
+  color: var(--color-accent);
+  border: 2px solid var(--color-accent);
+  background: transparent;
+}
+
+.suite-download:hover {
+  color: var(--color-text-light);
+  background: var(--color-accent);
+}
+
+.suite-screenshot-card {
+  margin: 0;
+  padding: var(--space-lg);
+  background: var(--color-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-medium);
+}
+
+.suite-screenshot {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-strip);
+}
+
+.suite-screenshot-card figcaption {
+  margin-top: var(--space-sm);
+  color: var(--color-muted);
+  font-size: var(--font-sm);
+  line-height: var(--line-normal);
+  text-align: center;
+}
+
+.suite-components {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.suite-components section {
+  padding-top: var(--space-sm);
+  border-top: var(--divider);
+}
+
+.suite-components h3 {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--font-md);
+}
+
+.suite-components p {
+  margin: 0;
+}
+
+.suite-note {
+  margin: var(--space-md) 0 0;
+  padding-top: var(--space-md);
+  border-top: var(--divider);
+}
+
+@media (max-width: 700px) {
+  .suite-screenshot-card {
+    padding: var(--space-md);
+  }
+
+  .suite-components {
+    grid-template-columns: 1fr;
+  }
+
+  .suite-actions {
+    align-items: stretch;
+  }
+
+  .suite-actions .extra-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

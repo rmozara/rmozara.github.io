@@ -1,0 +1,106 @@
+/* =========================================
+   Stacking & Layering (z-index authority)
+   =========================================
+   Purpose:
+   - Centralize z-index decisions in one place.
+   - Prevent ad-hoc z-index numbers across files.
+   - Make fixed/sticky layers predictable.
+========================================= */
+
+/* -----------------------------------------
+   Global layers
+----------------------------------------- */
+
+/* Wrap establishes a controlled stacking context */
+.wrap {
+  position: relative;
+  z-index: var(--z-wrap);
+}
+
+/* Feature strip sits above wrap */
+.feature,
+.feature-strip {
+  position: relative;
+  z-index: var(--z-feature);
+}
+
+/* Navigation must stay above header/feature/content */
+.nav,
+.site-nav {
+  position: fixed;
+  z-index: var(--z-nav);
+}
+
+/* If you have a “nav backdrop / drawer overlay” that uses z-nav - 1 */
+.nav-backdrop,
+.nav-overlay {
+  z-index: calc(var(--z-nav) - 1);
+}
+
+/* Footer fixed bar (you already tokenized --z-footer) */
+.footer,
+.site-footer,
+.footer-bar {
+  position: fixed;
+  z-index: var(--z-footer);
+}
+
+/* Sidebar (sticky) */
+.sidebar {
+  position: sticky;
+  z-index: var(--z-sidebar);
+}
+
+/* -----------------------------------------
+   Header overlay model (removes z-index fights)
+----------------------------------------- */
+
+/*
+If your header uses ::after as an overlay, this pattern avoids "!important":
+- header becomes a stacking context
+- overlay at 0
+- header content at 1
+*/
+.header {
+  position: relative;
+  z-index: var(--z-header);
+}
+
+.header::after {
+  z-index: var(--z-header-overlay);
+}
+
+.header .hero {
+  position: relative;
+  z-index: var(--z-header-content);
+}
+
+/* If you have a dedicated header content wrapper, use it.
+   Replace .header__inner with your real selector if different. */
+.header__inner,
+.header .inner,
+.header .content {
+  position: relative;
+  z-index: var(--z-header-content);
+}
+
+/* -----------------------------------------
+   Card overlap layers (replacing hard-coded 2/3)
+----------------------------------------- */
+
+.txt-card {
+  z-index: var(--z-card-base);
+}
+
+.img-card {
+  z-index: var(--z-card-overlap);
+}
+
+.wrap::after {
+  z-index: var(--z-wrap);
+}
+
+.feature-wrap {
+  position: absolute;
+  z-index: var(--z-feature);
+}

@@ -10,11 +10,9 @@
    Wrapper
 ----------------------------------------- */
 .feature-wrap {
-  position: absolute;
   bottom: var(--feature-overlap, var(--feature-overlap-default));
   left: 0;
   right: 0;
-  z-index: var(--z-feature);
   pointer-events: none;
 }
 
@@ -84,4 +82,14 @@
 .feature-strip .seg:hover {
   background: rgba(var(--color-blue-soft-rgb), 0.12);
   color: var(--color-blue-soft);
+}
+
+/* Intermediate widths: keep the four-segment strip compact instead of
+   gaining height only because the longer labels wrap. */
+@media (min-width: 701px) and (max-width: 900px) {
+  .feature-strip .seg span {
+    font-size: var(--font-base);
+    letter-spacing: calc(var(--letter-space) * 0.75);
+    white-space: nowrap;
+  }
 }

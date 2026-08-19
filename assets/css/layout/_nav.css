@@ -11,13 +11,11 @@
    Base Navigation Container
 ----------------------------------------- */
 .nav {
-  position: fixed;
   top: var(--nav-top, 0);
   left: var(--nav-left, 0);
   right: var(--nav-right, 0);
   width: auto;
   height: var(--nav-h);
-  z-index: var(--z-nav); /* 20 */
   background: transparent;
   display: block;
   margin: 0;
@@ -26,21 +24,6 @@
   transition:
     background var(--transition-base),
     box-shadow var(--transition-fast);
-}
-
-/* Full-width pseudo-background for fade-in effect */
-.nav::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--nav-h);
-  background: transparent;
-  transition:
-    background var(--transition-base),
-    box-shadow var(--transition-fast);
-  z-index: calc(var(--z-nav) - 1); /* 19 */
 }
 
 /* -----------------------------------------
@@ -89,10 +72,6 @@ body.scrolled .nav {
   box-shadow:
     0 2px 6px rgba(var(--color-fg-rgb), 0.08),
     0 0 0 1px rgba(var(--color-fg-rgb), 0.05);
-}
-
-body.scrolled .nav::before {
-  background: var(--color-bg);
   border-bottom: 1px solid rgba(var(--color-fg-rgb), 0.1);
 }
 
@@ -150,15 +129,97 @@ body.scrolled .nav .brand-name:hover {
   color: var(--color-muted) !important;
 }
 
-/* -----------------------------------------
-   Stacking Consistency
------------------------------------------ */
-.nav .bar,
-.nav .links,
-.nav .brand,
-.nav a,
-.nav .brand-name,
-.nav-logo {
-  position: relative;
-  z-index: var(--z-nav);
+/* =========================================
+   Mobile Navigation – Burger Menu
+   -----------------------------------------
+   Goals:
+   - Keep hero image visible (no permanent white block), even when scrolled.
+   - Collapse links into a toggle panel.
+   - Menu open state uses white background for readability.
+========================================= */
+
+.nav-toggle {
+  display: none;               /* shown only on mobile */
+  background: transparent;
+  border: 0;
+  padding: 0.35rem 0.5rem;
+  cursor: pointer;
+  color: currentColor;
+}
+
+/* simple hamburger icon */
+.nav-toggle span {
+  display: block;
+  width: 26px;
+  height: 2px;
+  background: currentColor;
+  margin: 6px 0;
+}
+
+/* A small breathing margin while the full desktop link row still fits. */
+@media (min-width: 901px) and (max-width: 1200px) {
+  .nav .bar {
+    padding-inline: var(--space-sm);
+  }
+}
+
+/* The navigation runs out of room before the rest of the layout does. */
+@media (max-width: 900px) {
+  .nav .bar {
+    justify-content: space-between;
+    max-width: none;
+    width: 100%;
+    padding: 0 var(--space-md);
+  }
+
+  .nav-toggle {
+    display: inline-block;
+    color: var(--color-text-light);
+  }
+  .nav .links { display: none; }
+
+  body.scrolled:not(.nav-open) .nav-toggle {
+    color: var(--color-accent-dark);
+  }
+
+  body.nav-open .nav {
+    background: var(--color-bg) !important;
+    border-bottom: 1px solid rgba(var(--color-fg-rgb), 0.1);
+    box-shadow: 0 2px 6px rgba(var(--color-fg-rgb), 0.08);
+  }
+
+  body.nav-open .nav .brand-name,
+  body.nav-open .nav-toggle { color: var(--color-accent-dark) !important; }
+
+  body.nav-open .nav .links {
+    display: flex;
+    position: fixed;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    z-index: var(--z-nav);
+    flex-direction: column;
+    gap: 0;
+    padding: var(--space-sm) var(--space-md);
+    background: var(--color-bg);
+    border-bottom: 1px solid rgba(var(--color-fg-rgb), 0.1);
+    box-shadow: 0 6px 20px rgba(var(--color-fg-rgb), 0.1);
+  }
+
+  body.nav-open .nav .links a {
+    color: var(--color-accent-dark);
+    font-size: 1rem;
+    line-height: 1.2;
+    padding: 0.6rem 0;
+    width: 100%;
+    text-align: left;
+  }
+
+  /* Match the desktop/scrolled navigation's interaction palette.
+     The more specific open-menu link rule above otherwise wins over
+     the global hover/active color between 701 and 900px. */
+  body.nav-open .nav .links a:hover,
+  body.nav-open .nav .links a.active {
+    color: var(--color-blue-soft);
+  }
 }

@@ -1,20 +1,4 @@
 // =========================================
-// Breadcrumb Initialisation for Poems Page
-// =========================================
-
-document.addEventListener("DOMContentLoaded", () => {
-  if (!bcSection || !bcCurrent) return;
-
-  // Poems-page configuration
-  bcSection.textContent = "Photos & Poems";
-  bcSection.href = "/pages/anthology/photos-poems/index.html";
-  bcCurrent.textContent = "Poems";
-
-  // Separator visible
-  if (bcSpacer) bcSpacer.style.display = "inline";
-});
-
-// =========================================
 // Poems Page – Sidebar Hover Reveal Logic
 // =========================================
 
@@ -24,16 +8,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const strip = sidebar.querySelector(".sidebar-strip");
   const panel = sidebar.querySelector(".sidebar-panel");
+  const closeButton = sidebar.querySelector(".sidebar-close");
+  strip.setAttribute("role", "button");
+  strip.setAttribute("tabindex", "0");
+  strip.setAttribute("aria-expanded", "false");
+  strip.setAttribute("aria-controls", "poems-contents-panel");
+  panel.id = "poems-contents-panel";
   let hoverTimer;
 
   const openSidebar = () => {
     clearTimeout(hoverTimer);
     sidebar.classList.add("active");
+    strip.setAttribute("aria-expanded", "true");
   };
 
   const closeSidebar = () => {
     hoverTimer = setTimeout(() => {
       sidebar.classList.remove("active");
+      strip.setAttribute("aria-expanded", "false");
     }, 150);
   };
 
@@ -41,6 +33,38 @@ document.addEventListener("DOMContentLoaded", () => {
   strip.addEventListener("mouseleave", closeSidebar);
   panel.addEventListener("mouseenter", openSidebar);
   panel.addEventListener("mouseleave", closeSidebar);
+
+  const toggleSidebar = () => {
+    if (sidebar.classList.contains("active")) {
+      clearTimeout(hoverTimer);
+      sidebar.classList.remove("active");
+      strip.setAttribute("aria-expanded", "false");
+    } else {
+      openSidebar();
+    }
+  };
+
+  strip.addEventListener("click", toggleSidebar);
+  closeButton.addEventListener("click", () => {
+    clearTimeout(hoverTimer);
+    sidebar.classList.remove("active");
+    strip.setAttribute("aria-expanded", "false");
+    strip.focus();
+  });
+  strip.addEventListener("keydown", e => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      toggleSidebar();
+    }
+  });
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && sidebar.classList.contains("active")) {
+      clearTimeout(hoverTimer);
+      sidebar.classList.remove("active");
+      strip.setAttribute("aria-expanded", "false");
+      strip.focus();
+    }
+  });
 });
 
 // =========================================
@@ -101,8 +125,6 @@ window.addEventListener("DOMContentLoaded", async () => {
         ? (s.side === "right" ? "flex-end" : "flex-start")
         : "center";
       book.className = `book book--${s.kind}`;
-      book.style.width = s.kind === "single" ? "450px" : "900px";
-
       // Fill content
       if (s.kind === "single") {
         // render only the single-side page (right for cover, left for closing)

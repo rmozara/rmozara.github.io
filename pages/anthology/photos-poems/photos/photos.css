@@ -30,7 +30,8 @@
   padding: var(--space-lg);
   text-align: center;
   margin: 0 auto var(--space-lg);
-  width: var(--photos-intro-w, 760px);
+  width: min(var(--photos-intro-w, 760px), 100%);
+  box-sizing: border-box;
 }
 
 .photos-page .txt-card h2 {
@@ -225,12 +226,13 @@
 
   .lightbox-prev,
   .lightbox-next {
-    left: 8px;
-    right: 8px;
     width: var(--lightbox-btn-size-sm, 48px);
     height: var(--lightbox-btn-size-sm, 48px);
     font-size: 1.8rem;
   }
+
+  .lightbox-prev { left: 8px; }
+  .lightbox-next { right: 8px; }
 
   .lightbox-close {
     top: 8px;
