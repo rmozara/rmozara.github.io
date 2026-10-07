@@ -14,6 +14,11 @@
   <link rel="shortcut icon" href="/assets/img/global/symbol.ico">
 
   <!-- ========== STYLES ========== -->
+  <style>
+    html.preload body {
+      opacity: 0;
+    }
+  </style>
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="stylesheet" href="/pages/essays/essay-card.css">
   <link rel="stylesheet" href="/pages/essays/essays.css">
@@ -34,7 +39,38 @@
       <div class="col">
         <section class="essays-grid" id="essayGrid">
 
-          <!-- === Single Essay Card === -->
+          <!-- === WZW Essay Card === -->
+          <article class="essay-card">
+            <a href="wzw-coset-model/index.html" class="essay-thumb-frame essay-thumb-frame--wzw">
+              <img
+                src="/assets/img/essays/wzw-hyperbolic-tiling.svg"
+                alt="Ideal-triangle hyperbolic tiling"
+                class="essay-thumb essay-thumb--contain"
+              >
+            </a>
+            <div class="essay-content">
+              <p class="essay-date">October 3, 2026</p>
+              <h2 class="essay-title">
+                <a href="wzw-coset-model/index.html">
+                  Affine Branching and Modular Properties of the PSU(1,1|2)/SU(1|2) WZW Coset Model
+                </a>
+              </h2>
+              <hr>
+              <p class="essay-excerpt">
+                This paper derives affine branching functions and modular transformations for the non-compact PSU(1,1|2)/SU(1|2) WZW coset model, including discrete, continuous, and atypical representations.
+              </p>
+              <div class="essay-hidden">
+                affine branching functions modular transformations non-compact coset model conformal field theory
+                WZW models discrete representations principal continuous representations atypical representations
+                spectral flow characters modular properties mathematical physics PSU(1,1|2) SU(1|2)
+              </div>
+              <a href="/pages/essays/wzw-coset-model/index.html" class="read-more">
+                Read more <i data-lucide="chevron-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- === Lorentz Essay Card === -->
           <article class="essay-card">
             <a href="lorentz-transformations/index.html">
               <img
@@ -80,6 +116,11 @@
         <div class="recent-posts">
           <h3>Recent Essays</h3>
           <ul>
+            <li>
+              <a href="/pages/essays/wzw-coset-model/index.html">
+                Affine Branching and Modular Properties of the PSU(1,1|2)/SU(1|2) WZW Coset Model
+              </a>
+            </li>
             <li>
               <a href="/pages/essays/lorentz-transformations/index.html">
                 Local Lorentz Transformations and Curvature

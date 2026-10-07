@@ -8,6 +8,10 @@
      header offset, and responsive tweaks
 ========================================= */
 
+.essay-detail-page .wzw-detail-image {
+  padding-top: var(--space-md);
+}
+
 /* -----------------------------------------
    Sidebar
    ----------------------------------------- */

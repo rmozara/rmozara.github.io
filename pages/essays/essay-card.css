@@ -31,6 +31,11 @@ body.essays-page .essay-card:hover {
   object-fit: cover;
 }
 
+.essay-thumb--contain {
+  object-fit: contain;
+  object-position: center;
+}
+
 /* --- Inner content block --- */
 .essay-content {
   padding: var(--space-md);

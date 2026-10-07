@@ -17,7 +17,7 @@ html.preload body {
 }
 html.ready body {
   opacity: 1;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.15s ease;
 }
 
 

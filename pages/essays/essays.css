@@ -14,6 +14,41 @@
   width: 100%;
 }
 
+/* Keep overview cards equal-height and pin their action links to the bottom. */
+.essays-grid > .essay-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.essays-grid > .essay-card > .essay-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.essays-grid > .essay-card > .essay-content > .read-more {
+  margin-top: auto;
+}
+
+/* Preserve the shared thumbnail box while containing the complete WZW disk. */
+.essays-grid > .essay-card > .essay-thumb-frame--wzw {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  height: var(--essay-thumb-h);
+  justify-content: center;
+  overflow: hidden;
+  padding: var(--space-md);
+  width: 100%;
+}
+
+.essays-grid > .essay-card > .essay-thumb-frame--wzw > .essay-thumb {
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+}
+
 /* With the sidebar still visible beside the content, one generous card
    column is more readable than two cramped cards. */
 @media (max-width: 1260px) {
