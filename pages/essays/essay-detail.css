@@ -96,3 +96,12 @@ body.essay-detail-page .sidebar .recent-essays {
   }
 }
 
+/* World Amoeba: uniform, compact paragraph spacing. */
+.world-amoeba-page .essay-abstract > p {
+  margin-bottom: var(--space-sm);
+}
+
+/* World Amoeba: indented section openings. */
+.world-amoeba-page .essay-abstract > p.essay-section-end + p {
+  text-indent: clamp(0.75em, 3vw, 1.25em);
+}
