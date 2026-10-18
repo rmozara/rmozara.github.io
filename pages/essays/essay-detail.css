@@ -96,6 +96,18 @@ body.essay-detail-page .sidebar .recent-essays {
   }
 }
 
+/* Decorative essay headers: retain the hidden background-reference title. */
+.essay-detail-page .header--simple:not([aria-hidden="true"]) .hero h1 {
+  display: none;
+}
+
+/* Match the compact desktop height across essay detail pages. */
+@media (min-width: 901px) {
+  .essay-detail-page .header--simple {
+    padding-bottom: calc(var(--space-lg) - 12px);
+  }
+}
+
 /* World Amoeba: uniform, compact paragraph spacing. */
 .world-amoeba-page .essay-abstract > p {
   margin-bottom: var(--space-sm);

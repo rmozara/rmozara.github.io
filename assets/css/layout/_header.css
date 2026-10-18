@@ -20,6 +20,17 @@
   background-position: center var(--header-bg-offset-y, 50%);
 }
 
+/* Use the Lorentz reference frame rather than each hero's content height.
+   The attribute is added only after loadPartials.js measures that frame.
+   This also supersedes the mobile header's centered-position override. */
+.header[data-aligned-background] {
+  background-size: var(--header-image-width) var(--header-image-height);
+  background-position: center var(--header-image-top) !important;
+  /* Very tall mobile heroes may extend past the reference image's bounds.
+     Continue at the same scale instead of exposing an unpainted band. */
+  background-repeat: repeat-y;
+}
+
 /* Dark overlay layer for text readability */
 .header::after {
   content: "";
